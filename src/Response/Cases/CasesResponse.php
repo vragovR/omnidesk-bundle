@@ -4,29 +4,29 @@ namespace OmnideskBundle\Response\Cases;
 use OmnideskBundle\Entity\Cases;
 
 /**
- * Class GetCasesResponse
+ * Class CasesResponse
  * @package OmnideskBundle\Response\Cases
  */
-class CreateCasesResponse
+class CasesResponse
 {
     /**
      * @var Cases
      */
-    private $case;
+    private $cases;
 
     /**
      * @return Cases
      */
-    public function getCase()
+    public function getCases()
     {
-        return $this->case;
+        return $this->cases;
     }
 
     /**
-     * @param Cases $case
+     * @param Cases $cases
      */
-    public function setCase(Cases $case)
+    public function setCases(Cases $cases)
     {
-        $this->case = $case;
+        $this->cases = $cases;
     }
 }

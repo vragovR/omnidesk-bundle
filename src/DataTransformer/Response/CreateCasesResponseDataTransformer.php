@@ -2,7 +2,7 @@
 namespace OmnideskBundle\DataTransformer\Response;
 
 use OmnideskBundle\DataTransformer\Entity\CasesDataTransformer;
-use OmnideskBundle\Response\Cases\CreateCasesResponse;
+use OmnideskBundle\Response\Cases\CasesResponse;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
@@ -27,21 +27,21 @@ class CreateCasesResponseDataTransformer implements DataTransformerInterface
 
     /**
      * @param array $value
-     * @return CreateCasesResponse
+     * @return CasesResponse
      */
     public function transform($value)
     {
-        $response = new CreateCasesResponse();
+        $response = new CasesResponse();
 
         $case = $this->casesDataTransformer->transform($value['case']);
 
-        $response->setCase($case);
+        $response->setCases($case);
 
         return $response;
     }
 
     /**
-     * @param CreateCasesResponse $value
+     * @param CasesResponse $value
      * @return array
      */
     public function reverseTransform($value)

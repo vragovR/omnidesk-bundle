@@ -9,7 +9,7 @@ use OmnideskBundle\DataTransformer\Response\CreateCasesResponseDataTransformer;
 use OmnideskBundle\DataTransformer\Response\GetCasesResponseDataTransformer;
 use OmnideskBundle\Request\Cases\CreateCasesRequest;
 use OmnideskBundle\Request\Cases\GetCasesRequest;
-use OmnideskBundle\Response\Cases\CreateCasesResponse;
+use OmnideskBundle\Response\Cases\CasesResponse;
 use OmnideskBundle\Response\Cases\GetCasesResponse;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
@@ -69,7 +69,7 @@ class CasesService
 
     /**
      * @param CreateCasesRequest $request
-     * @return CreateCasesResponse
+     * @return CasesResponse
      */
     public function create(CreateCasesRequest $request)
     {
@@ -78,7 +78,7 @@ class CasesService
         $params = $this->createCasesRequestDataTransformer->transform($request);
 
         try {
-            $params = $processor->processConfiguration($configuration, ['params' => $params]);
+            $params = $processor->processConfiguration($configuration, ['params' => array_filter($params)]);
         } catch (InvalidConfigurationException $exception) {
             throw new InvalidConfigurationException($exception->getMessage());
         }
@@ -99,7 +99,7 @@ class CasesService
         $params = $this->getCasesRequestDataTransformer->transform($request);
 
         try {
-            $params = $processor->processConfiguration($configuration, ['params' => $params]);
+            $params = $processor->processConfiguration($configuration, ['params' => array_filter($params)]);
         } catch (InvalidConfigurationException $exception) {
             throw new InvalidConfigurationException($exception->getMessage());
         }
