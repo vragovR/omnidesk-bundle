@@ -16,8 +16,8 @@ class CasesDataTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        $response = new Cases();
-        $response
+        $entity = new Cases();
+        $entity
             ->setId($value['case_id'])
             ->setNumber($value['case_number'])
             ->setSubject($value['subject'])
@@ -36,7 +36,7 @@ class CasesDataTransformer implements DataTransformerInterface
             ->setLanguageId($value['language_id'])
             ->setLabels($value['labels']);
 
-        return $response;
+        return $entity;
     }
 
     /**

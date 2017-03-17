@@ -20,15 +20,15 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->scalarNode('domain')
-            ->isRequired()
-            ->end()
-            ->scalarNode('email')
-            ->isRequired()
-            ->end()
-            ->scalarNode('key')
-            ->isRequired()
-            ->end()
+                ->scalarNode('domain')
+                    ->isRequired()
+                ->end()
+                ->scalarNode('email')
+                    ->isRequired()
+                ->end()
+                ->scalarNode('key')
+                    ->isRequired()
+                ->end()
             ->end();
 
         return $treeBuilder;

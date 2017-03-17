@@ -13,16 +13,30 @@ services:
       - "@transformer.response.create_cases"
       - "@transformer.request.get_cases"
       - "@transformer.response.get_cases"
+  service.language:
+    class: OmnideskBundle\Service\LanguageService
+    arguments:
+      - "@service.request"
+      - "@transformer.response.get_language"
+
   # Data Transformers
+  # Request
   transformer.request.create_cases:
     class: OmnideskBundle\DataTransformer\Request\CreateCasesRequestDataTransformer
   transformer.request.get_cases:
     class: OmnideskBundle\DataTransformer\Request\GetCasesRequestDataTransformer
+  # Response
   transformer.response.create_cases:
     class: OmnideskBundle\DataTransformer\Response\CreateCasesResponseDataTransformer
     arguments: ["@transformer.entity.cases"]
   transformer.response.get_cases:
     class: OmnideskBundle\DataTransformer\Response\GetCasesResponseDataTransformer
     arguments: ["@transformer.entity.cases"]
+  transformer.response.get_language:
+    class: OmnideskBundle\DataTransformer\Response\GetLanguageResponseDataTransformer
+    arguments: ["@transformer.entity.language"]
+  # Entity
   transformer.entity.cases:
     class: OmnideskBundle\DataTransformer\Entity\CasesDataTransformer
+  transformer.entity.language:
+    class: OmnideskBundle\DataTransformer\Entity\LanguageDataTransformer
