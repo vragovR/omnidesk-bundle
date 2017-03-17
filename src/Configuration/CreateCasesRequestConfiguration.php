@@ -51,10 +51,8 @@ class CreateCasesRequestConfiguration implements ConfigurationInterface
                     ->defaultNull()
                 ->end()
                 ->arrayNode('custom_fields')
-                    ->defaultValue([])
                 ->end()
                 ->arrayNode('labels')
-                    ->defaultValue([])
                 ->end()
             ->end();
 
