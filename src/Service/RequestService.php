@@ -35,7 +35,7 @@ class RequestService
      * @param array  $params
      * @return array
      */
-    public function post($url, $params)
+    public function post($url, array $params = [])
     {
         $response = $this->client->post($this->getUrl($url), [
             'headers' => $this->getHeaders(),
@@ -51,7 +51,7 @@ class RequestService
      * @param array  $params
      * @return array
      */
-    public function get($url, $params)
+    public function get($url, array $params = [])
     {
         $response = $this->client->get($this->getUrl($url), [
             'headers' => $this->getHeaders(),

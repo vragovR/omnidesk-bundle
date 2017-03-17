@@ -12,8 +12,9 @@ services:
     arguments:
       - "@service.request"
       - "@transformer.request.create_cases"
-      - "@transformer.response.create_cases"
       - "@transformer.request.get_cases"
+      - "@transformer.request.view_cases"
+      - "@transformer.response.cases"
       - "@transformer.response.get_cases"
 
   service.message:
@@ -35,11 +36,13 @@ services:
     class: OmnideskBundle\DataTransformer\Request\CreateCasesRequestDataTransformer
   transformer.request.get_cases:
     class: OmnideskBundle\DataTransformer\Request\GetCasesRequestDataTransformer
+  transformer.request.view_cases:
+    class: OmnideskBundle\DataTransformer\Request\ViewCasesRequestDataTransformer
   transformer.request.get_messages:
     class: OmnideskBundle\DataTransformer\Request\GetMessagesRequestDataTransformer
   # Response
-  transformer.response.create_cases:
-    class: OmnideskBundle\DataTransformer\Response\CreateCasesResponseDataTransformer
+  transformer.response.cases:
+    class: OmnideskBundle\DataTransformer\Response\CasesResponseDataTransformer
     arguments: ["@transformer.entity.cases"]
   transformer.response.get_cases:
     class: OmnideskBundle\DataTransformer\Response\GetCasesResponseDataTransformer
