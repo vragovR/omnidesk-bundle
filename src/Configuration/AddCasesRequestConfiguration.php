@@ -54,6 +54,13 @@ class AddCasesRequestConfiguration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('labels')
                 ->end()
+                ->arrayNode('case')
+                    ->children()
+                        ->arrayNode('attachments')
+                            ->prototype('scalar')
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

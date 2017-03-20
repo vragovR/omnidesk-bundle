@@ -1,37 +1,40 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Request;
+namespace OmnideskBundle\DataTransformer\Request\Cases;
 
 use OmnideskBundle\Request\Cases\AddCasesRequest;
-use OmnideskBundle\Request\Cases\ListCasesRequest;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class ListCasesRequestDataTransformer
+ * Class AddCasesRequestDataTransformer
  * @package OmnideskBundle\DataTransformer\Request
  */
-class ListCasesRequestDataTransformer implements DataTransformerInterface
+class AddCasesRequestDataTransformer implements DataTransformerInterface
 {
     /**
-     * @param ListCasesRequest $value
+     * @param AddCasesRequest $value
      * @return array
      */
     public function transform($value)
     {
+        $attachments = [];
+        foreach ($value->getAttachments() as $attachment) {
+            $attachments[] = $attachment->getRealPath();
+        }
+
         return [
-            'page' => $value->getPage(),
-            'limit' => $value->getLimit(),
-            'user_id' => $value->getUserId(),
             'user_email' => $value->getUserEmail(),
             'user_phone' => $value->getUserPhone(),
+            'user_full_name' => $value->getUserFullName(),
             'subject' => $value->getSubject(),
-            'staff_id' => $value->getStaffId(),
+            'content' => $value->getContent(),
+            'content_html' => $value->getContentHtml(),
             'group_id' => $value->getGroupId(),
-            'channel' => $value->getChannel(),
-            'priority' => $value->getPriority(),
-            'status' => $value->getStatus(),
+            'language_id' => $value->getLanguageId(),
             'custom_fields' => $value->getCustomFields(),
             'labels' => $value->getLabels(),
-            'sort' => $value->getSort(),
+            'case' => [
+                'attachments' => $attachments,
+            ],
         ];
     }
 

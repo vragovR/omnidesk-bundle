@@ -1,7 +1,9 @@
 <?php
 namespace OmnideskBundle\Request\Cases;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use OmnideskBundle\Request\RequestInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class AddCasesRequest
@@ -58,6 +60,19 @@ class AddCasesRequest implements RequestInterface
      * @var array
      */
     private $labels;
+
+    /**
+     * @var ArrayCollection|File[]
+     */
+    private $attachments;
+
+    /**
+     * AddCasesRequest constructor.
+     */
+    public function __construct()
+    {
+        $this->attachments = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -247,5 +262,21 @@ class AddCasesRequest implements RequestInterface
         $this->labels = $labels;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection|File[]
+     */
+    public function getAttachments()
+    {
+        return $this->attachments;
+    }
+
+    /**
+     * @param File $attachment
+     */
+    public function addAttachment(File $attachment)
+    {
+        $this->attachments->add($attachment);
     }
 }

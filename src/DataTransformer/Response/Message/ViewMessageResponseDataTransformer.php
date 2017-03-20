@@ -1,5 +1,5 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Response;
+namespace OmnideskBundle\DataTransformer\Response\Message;
 
 use OmnideskBundle\DataTransformer\Entity\MessageDataTransformer;
 use OmnideskBundle\Response\Message\MessageResponse;

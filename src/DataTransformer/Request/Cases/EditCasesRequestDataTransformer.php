@@ -1,38 +1,38 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Request;
+namespace OmnideskBundle\DataTransformer\Request\Cases;
 
-use OmnideskBundle\Request\Cases\AddCasesRequest;
+use OmnideskBundle\Request\Cases\EditCasesRequest;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class AddCasesRequestDataTransformer
+ * Class EditCasesRequestDataTransformer
  * @package OmnideskBundle\DataTransformer\Request
  */
-class AddCasesRequestDataTransformer implements DataTransformerInterface
+class EditCasesRequestDataTransformer implements DataTransformerInterface
 {
     /**
-     * @param AddCasesRequest $value
+     * @param EditCasesRequest $value
      * @return array
      */
     public function transform($value)
     {
         return [
-            'user_email' => $value->getUserEmail(),
-            'user_phone' => $value->getUserPhone(),
-            'user_full_name' => $value->getUserFullName(),
+            'case_id' => $value->getCaseId(),
             'subject' => $value->getSubject(),
-            'content' => $value->getContent(),
-            'content_html' => $value->getContentHtml(),
             'group_id' => $value->getGroupId(),
+            'staff_id' => $value->getStaffId(),
+            'status' => $value->getStatus(),
+            'priority' => $value->getPriority(),
             'language_id' => $value->getLanguageId(),
             'custom_fields' => $value->getCustomFields(),
-            'labels' => $value->getLabels(),
+            'add_labels' => $value->getAddLabels(),
+            'delete_labels' => $value->getDeleteLabels(),
         ];
     }
 
     /**
      * @param array $value
-     * @return AddCasesRequest
+     * @return EditCasesRequest
      */
     public function reverseTransform($value)
     {

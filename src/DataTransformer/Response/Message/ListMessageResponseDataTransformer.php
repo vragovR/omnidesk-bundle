@@ -1,8 +1,7 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Response;
+namespace OmnideskBundle\DataTransformer\Response\Message;
 
 use OmnideskBundle\DataTransformer\Entity\MessageDataTransformer;
-use OmnideskBundle\Response\Cases\GetCasesResponse;
 use OmnideskBundle\Response\Message\ListMessageResponse;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -46,7 +45,7 @@ class ListMessageResponseDataTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param GetCasesResponse $value
+     * @param ListMessageResponse $value
      * @return array
      */
     public function reverseTransform($value)

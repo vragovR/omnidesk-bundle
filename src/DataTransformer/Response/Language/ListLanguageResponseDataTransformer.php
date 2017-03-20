@@ -1,8 +1,7 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Response;
+namespace OmnideskBundle\DataTransformer\Response\Language;
 
 use OmnideskBundle\DataTransformer\Entity\LanguageDataTransformer;
-use OmnideskBundle\Response\Cases\GetCasesResponse;
 use OmnideskBundle\Response\Language\GetLanguageResponse;
 use Symfony\Component\Form\DataTransformerInterface;
 
@@ -46,7 +45,7 @@ class ListLanguageResponseDataTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param GetCasesResponse $value
+     * @param GetLanguageResponse $value
      * @return array
      */
     public function reverseTransform($value)

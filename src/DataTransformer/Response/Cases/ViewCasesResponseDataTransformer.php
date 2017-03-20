@@ -1,5 +1,5 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Response;
+namespace OmnideskBundle\DataTransformer\Response\Cases;
 
 use OmnideskBundle\DataTransformer\Entity\CasesDataTransformer;
 use OmnideskBundle\Response\Cases\CasesResponse;
