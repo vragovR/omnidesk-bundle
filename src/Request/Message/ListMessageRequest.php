@@ -1,11 +1,13 @@
 <?php
 namespace OmnideskBundle\Request\Message;
 
+use OmnideskBundle\Request\RequestInterface;
+
 /**
- * Class GetMessagesRequest
+ * Class ListMessageRequest
  * @package OmnideskBundle\Request\Message
  */
-class GetMessagesRequest
+class ListMessageRequest implements RequestInterface
 {
     /**
      * @var string

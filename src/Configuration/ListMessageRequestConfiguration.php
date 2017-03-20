@@ -1,15 +1,15 @@
 <?php
 namespace OmnideskBundle\Configuration;
 
-use OmnideskBundle\Request\Message\GetMessagesRequest;
+use OmnideskBundle\Request\Message\ListMessageRequest;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Class GetMessagesRequestConfiguration
+ * Class ListMessageRequestConfiguration
  * @package OmnideskBundle\Configuration
  */
-class GetMessagesRequestConfiguration implements ConfigurationInterface
+class ListMessageRequestConfiguration implements ConfigurationInterface
 {
     /**
      * @var int
@@ -50,8 +50,8 @@ class GetMessagesRequestConfiguration implements ConfigurationInterface
                     ->validate()
                         ->ifNotInArray([
                             null,
-                            GetMessagesRequest::ORDER_ASC,
-                            GetMessagesRequest::ORDER_DESC,
+                            ListMessageRequest::ORDER_ASC,
+                            ListMessageRequest::ORDER_DESC,
                         ])
                         ->thenInvalid(self::MESSAGE_ORDER_INVALID_TYPE)
                     ->end()

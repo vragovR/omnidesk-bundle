@@ -1,7 +1,7 @@
 <?php
 namespace OmnideskBundle\Service;
 
-use OmnideskBundle\DataTransformer\Response\GetLanguageResponseDataTransformer;
+use OmnideskBundle\DataTransformer\Response\ListLanguageResponseDataTransformer;
 use OmnideskBundle\Response\Language\GetLanguageResponse;
 
 /**
@@ -16,18 +16,18 @@ class LanguageService
     protected $requestService;
 
     /**
-     * @var GetLanguageResponseDataTransformer
+     * @var ListLanguageResponseDataTransformer
      */
     protected $getLanguageResponseDataTransformer;
 
     /**
      * LanguageService constructor.
-     * @param RequestService                     $requestService
-     * @param GetLanguageResponseDataTransformer $getLanguageResponseDataTransformer
+     * @param RequestService                      $requestService
+     * @param ListLanguageResponseDataTransformer $getLanguageResponseDataTransformer
      */
     public function __construct(
         RequestService $requestService,
-        GetLanguageResponseDataTransformer $getLanguageResponseDataTransformer
+        ListLanguageResponseDataTransformer $getLanguageResponseDataTransformer
     ) {
         $this->requestService = $requestService;
         $this->getLanguageResponseDataTransformer = $getLanguageResponseDataTransformer;

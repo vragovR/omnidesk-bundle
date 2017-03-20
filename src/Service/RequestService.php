@@ -64,6 +64,36 @@ class RequestService
 
     /**
      * @param string $url
+     * @param array  $params
+     * @return array
+     */
+    public function put($url, array $params = [])
+    {
+        $response = $this->client->put($this->getUrl($url), [
+            'headers' => $this->getHeaders(),
+            'auth' => $this->getAuth(),
+            'query' => $params,
+        ]);
+
+        return json_decode((string) $response->getBody(), true);
+    }
+
+    /**
+     * @param string $url
+     * @return int
+     */
+    public function delete($url)
+    {
+        $response = $this->client->delete($this->getUrl($url), [
+            'headers' => $this->getHeaders(),
+            'auth' => $this->getAuth(),
+        ]);
+
+        return $response->getStatusCode();
+    }
+
+    /**
+     * @param string $url
      * @return string
      */
     protected function getUrl($url)

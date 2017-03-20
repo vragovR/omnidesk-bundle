@@ -1,11 +1,13 @@
 <?php
 namespace OmnideskBundle\Request\Cases;
 
+use OmnideskBundle\Request\RequestInterface;
+
 /**
  * Class GetCasesRequest
  * @package OmnideskBundle\Request\Cases
  */
-class ViewCasesRequest
+class ViewCasesRequest implements RequestInterface
 {
     /**
      * @var int

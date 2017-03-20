@@ -2,7 +2,7 @@
 namespace OmnideskBundle\Configuration;
 
 use OmnideskBundle\Entity\Cases;
-use OmnideskBundle\Request\Cases\GetCasesRequest;
+use OmnideskBundle\Request\Cases\ListCasesRequest;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -10,7 +10,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * Class CreateCasesConfiguration
  * @package OmnideskBundle\Configuration\Request
  */
-class GetCasesRequestConfiguration implements ConfigurationInterface
+class ListCasesRequestConfiguration implements ConfigurationInterface
 {
     /**
      * @var string
@@ -112,10 +112,10 @@ class GetCasesRequestConfiguration implements ConfigurationInterface
                     ->validate()
                         ->ifNotInArray([
                             null,
-                            GetCasesRequest::SORT_CREATED_AT_ASC,
-                            GetCasesRequest::SORT_CREATED_AT_DESC,
-                            GetCasesRequest::SORT_UPDATED_AT_ASC,
-                            GetCasesRequest::SORT_UPDATED_AT_DESC,
+                            ListCasesRequest::SORT_CREATED_AT_ASC,
+                            ListCasesRequest::SORT_CREATED_AT_DESC,
+                            ListCasesRequest::SORT_UPDATED_AT_ASC,
+                            ListCasesRequest::SORT_UPDATED_AT_DESC,
                         ])
                         ->thenInvalid(self::MESSAGE_SORT_INVALID_TYPE)
                     ->end()

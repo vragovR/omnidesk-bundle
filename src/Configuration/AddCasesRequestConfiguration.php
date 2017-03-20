@@ -8,7 +8,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * Class GetCasesRequestConfiguration
  * @package OmnideskBundle\Configuration
  */
-class CreateCasesRequestConfiguration implements ConfigurationInterface
+class AddCasesRequestConfiguration implements ConfigurationInterface
 {
     /**
      * @return TreeBuilder

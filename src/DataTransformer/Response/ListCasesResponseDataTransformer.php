@@ -6,10 +6,10 @@ use OmnideskBundle\Response\Cases\GetCasesResponse;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class CreateCasesDataTransformer
- * @package OmnideskBundle\DataTransformer\Request
+ * Class ListCasesResponseDataTransformer
+ * @package OmnideskBundle\DataTransformer\Response
  */
-class GetCasesResponseDataTransformer implements DataTransformerInterface
+class ListCasesResponseDataTransformer implements DataTransformerInterface
 {
     /**
      * @var CasesDataTransformer
@@ -18,11 +18,10 @@ class GetCasesResponseDataTransformer implements DataTransformerInterface
 
     /**
      * GetCasesResponseDataTransformer constructor.
-     * @param CasesDataTransformer $casesDataTransformer
      */
-    public function __construct(CasesDataTransformer $casesDataTransformer)
+    public function __construct()
     {
-        $this->casesDataTransformer = $casesDataTransformer;
+        $this->casesDataTransformer = new CasesDataTransformer();
     }
 
     /**

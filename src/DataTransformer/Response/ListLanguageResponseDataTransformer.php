@@ -7,10 +7,10 @@ use OmnideskBundle\Response\Language\GetLanguageResponse;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class GetLanguageResponseDataTransformer
+ * Class ListLanguageResponseDataTransformer
  * @package OmnideskBundle\DataTransformer\Response
  */
-class GetLanguageResponseDataTransformer implements DataTransformerInterface
+class ListLanguageResponseDataTransformer implements DataTransformerInterface
 {
     /**
      * @var LanguageDataTransformer

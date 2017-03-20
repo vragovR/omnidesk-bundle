@@ -1,11 +1,13 @@
 <?php
 namespace OmnideskBundle\Request\Cases;
 
+use OmnideskBundle\Request\RequestInterface;
+
 /**
- * Class CreateCasesRequest
+ * Class AddCasesRequest
  * @package OmnideskBundle\Request\Cases
  */
-class CreateCasesRequest
+class AddCasesRequest implements RequestInterface
 {
     /**
      * @var string

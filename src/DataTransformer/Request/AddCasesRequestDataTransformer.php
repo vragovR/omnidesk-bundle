@@ -1,43 +1,38 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Request;
 
-use OmnideskBundle\Request\Cases\CreateCasesRequest;
-use OmnideskBundle\Request\Cases\GetCasesRequest;
+use OmnideskBundle\Request\Cases\AddCasesRequest;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class GetCasesDataTransformer
+ * Class AddCasesRequestDataTransformer
  * @package OmnideskBundle\DataTransformer\Request
  */
-class GetCasesRequestDataTransformer implements DataTransformerInterface
+class AddCasesRequestDataTransformer implements DataTransformerInterface
 {
     /**
-     * @param GetCasesRequest $value
+     * @param AddCasesRequest $value
      * @return array
      */
     public function transform($value)
     {
         return [
-            'page' => $value->getPage(),
-            'limit' => $value->getLimit(),
-            'user_id' => $value->getUserId(),
             'user_email' => $value->getUserEmail(),
             'user_phone' => $value->getUserPhone(),
+            'user_full_name' => $value->getUserFullName(),
             'subject' => $value->getSubject(),
-            'staff_id' => $value->getStaffId(),
+            'content' => $value->getContent(),
+            'content_html' => $value->getContentHtml(),
             'group_id' => $value->getGroupId(),
-            'channel' => $value->getChannel(),
-            'priority' => $value->getPriority(),
-            'status' => $value->getStatus(),
+            'language_id' => $value->getLanguageId(),
             'custom_fields' => $value->getCustomFields(),
             'labels' => $value->getLabels(),
-            'sort' => $value->getSort(),
         ];
     }
 
     /**
      * @param array $value
-     * @return CreateCasesRequest
+     * @return AddCasesRequest
      */
     public function reverseTransform($value)
     {

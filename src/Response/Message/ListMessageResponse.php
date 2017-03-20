@@ -5,10 +5,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use OmnideskBundle\Entity\Message;
 
 /**
- * Class GetMessageResponse
+ * Class ListMessageResponse
  * @package OmnideskBundle\Response\Message
  */
-class GetMessagesResponse
+class ListMessageResponse
 {
     /**
      * @var Message[]|ArrayCollection

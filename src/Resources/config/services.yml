@@ -1,57 +1,86 @@
 services:
-  # Services
+  # Vendor
   guzzle.client:
     class: GuzzleHttp\Client
-
+  # Services
   service.request:
     class: OmnideskBundle\Service\RequestService
     arguments: ["%omnidesk%", "@guzzle.client"]
-
   service.cases:
     class: OmnideskBundle\Service\CasesService
     arguments:
       - "@service.request"
-      - "@transformer.request.create_cases"
-      - "@transformer.request.get_cases"
-      - "@transformer.request.view_cases"
-      - "@transformer.response.cases"
-      - "@transformer.response.get_cases"
-
+      - "@factory.cases.transformer"
+      - "@factory.cases.configuration"
   service.message:
     class: OmnideskBundle\Service\MessageService
     arguments:
       - "@service.request"
-      - "@transformer.request.get_messages"
-      - "@transformer.response.get_messages"
-
+      - "@factory.message.transformer"
+      - "@factory.message.configuration"
   service.language:
     class: OmnideskBundle\Service\LanguageService
     arguments:
       - "@service.request"
-      - "@transformer.response.get_language"
-
+      - "@transformer.response.language.list"
+  # Factory
+  factory.cases.transformer:
+    class: OmnideskBundle\Factory\CasesDataTransformerFactory
+    arguments:
+      - "@transformer.request.cases.add"
+      - "@transformer.request.cases.edit"
+      - "@transformer.request.cases.list"
+      - "@transformer.request.cases.view"
+      - "@transformer.response.cases.list"
+      - "@transformer.response.cases.view"
+  factory.cases.configuration:
+    class: OmnideskBundle\Factory\CasesConfigurationFactory
+    arguments:
+      - "@configuration.cases.add"
+      - "@configuration.cases.edit"
+      - "@configuration.cases.list"
+      - "@configuration.cases.view"
+  factory.message.transformer:
+    class: OmnideskBundle\Factory\MessageDataTransformerFactory
+    arguments:
+      - "@transformer.request.message.add"
+      - "@transformer.request.message.list"
+      - "@transformer.response.message.list"
+      - "@transformer.response.message.view"
+  factory.message.configuration:
+    class: OmnideskBundle\Factory\MessageConfigurationFactory
+    arguments:
+      - "@configuration.message.add"
+      - "@configuration.message.list"
   # Data Transformers
   # Request
-  transformer.request.create_cases:
-    class: OmnideskBundle\DataTransformer\Request\CreateCasesRequestDataTransformer
-  transformer.request.get_cases:
-    class: OmnideskBundle\DataTransformer\Request\GetCasesRequestDataTransformer
-  transformer.request.view_cases:
+  transformer.request.cases.add:
+    class: OmnideskBundle\DataTransformer\Request\AddCasesRequestDataTransformer
+  transformer.request.cases.edit:
+    class: OmnideskBundle\DataTransformer\Request\EditCasesRequestDataTransformer
+  transformer.request.cases.list:
+    class: OmnideskBundle\DataTransformer\Request\ListCasesRequestDataTransformer
+  transformer.request.cases.view:
     class: OmnideskBundle\DataTransformer\Request\ViewCasesRequestDataTransformer
-  transformer.request.get_messages:
-    class: OmnideskBundle\DataTransformer\Request\GetMessagesRequestDataTransformer
+  transformer.request.message.add:
+    class: OmnideskBundle\DataTransformer\Request\AddMessageRequestDataTransformer
+  transformer.request.message.list:
+    class: OmnideskBundle\DataTransformer\Request\ListMessageRequestDataTransformer
   # Response
-  transformer.response.cases:
-    class: OmnideskBundle\DataTransformer\Response\CasesResponseDataTransformer
+  transformer.response.cases.view:
+    class: OmnideskBundle\DataTransformer\Response\ViewCasesResponseDataTransformer
     arguments: ["@transformer.entity.cases"]
-  transformer.response.get_cases:
-    class: OmnideskBundle\DataTransformer\Response\GetCasesResponseDataTransformer
+  transformer.response.cases.list:
+    class: OmnideskBundle\DataTransformer\Response\ListCasesResponseDataTransformer
     arguments: ["@transformer.entity.cases"]
-  transformer.response.get_messages:
-    class: OmnideskBundle\DataTransformer\Response\GetMessagesResponseDataTransformer
+  transformer.response.message.view:
+    class: OmnideskBundle\DataTransformer\Response\ViewMessageResponseDataTransformer
     arguments: ["@transformer.entity.message"]
-  transformer.response.get_language:
-    class: OmnideskBundle\DataTransformer\Response\GetLanguageResponseDataTransformer
+  transformer.response.message.list:
+    class: OmnideskBundle\DataTransformer\Response\ListMessageResponseDataTransformer
+    arguments: ["@transformer.entity.message"]
+  transformer.response.language.list:
+    class: OmnideskBundle\DataTransformer\Response\ListLanguageResponseDataTransformer
     arguments: ["@transformer.entity.language"]
   # Entity
   transformer.entity.cases:
@@ -60,3 +89,16 @@ services:
     class: OmnideskBundle\DataTransformer\Entity\MessageDataTransformer
   transformer.entity.language:
     class: OmnideskBundle\DataTransformer\Entity\LanguageDataTransformer
+  # Configuration
+  configuration.cases.add:
+    class: OmnideskBundle\Configuration\AddCasesRequestConfiguration
+  configuration.cases.edit:
+    class: OmnideskBundle\Configuration\EditCasesRequestConfiguration
+  configuration.cases.list:
+    class: OmnideskBundle\Configuration\ListCasesRequestConfiguration
+  configuration.cases.view:
+    class: OmnideskBundle\Configuration\ViewCasesRequestConfiguration
+  configuration.message.add:
+    class: OmnideskBundle\Configuration\AddMessageRequestConfiguration
+  configuration.message.list:
+    class: OmnideskBundle\Configuration\ListMessageRequestConfiguration

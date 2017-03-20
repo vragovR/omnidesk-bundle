@@ -1,19 +1,19 @@
 <?php
 namespace OmnideskBundle\Service;
 
-use OmnideskBundle\Configuration\GetMessagesRequestConfiguration;
-use OmnideskBundle\DataTransformer\Request\GetMessagesRequestDataTransformer;
-use OmnideskBundle\DataTransformer\Response\GetMessagesResponseDataTransformer;
-use OmnideskBundle\Request\Message\GetMessagesRequest;
-use OmnideskBundle\Response\Message\GetMessagesResponse;
+use OmnideskBundle\Factory\MessageConfigurationFactory;
+use OmnideskBundle\Factory\MessageDataTransformerFactory;
+use OmnideskBundle\Request\Message\AddMessageRequest;
+use OmnideskBundle\Request\Message\ListMessageRequest;
+use OmnideskBundle\Response\Message\ListMessageResponse;
+use OmnideskBundle\Response\Message\MessageResponse;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\Config\Definition\Processor;
 
 /**
  * Class MessageService
  * @package OmnideskBundle\Service
  */
-class MessageService
+class MessageService extends AbstractService
 {
     /**
      * @var RequestService
@@ -21,49 +21,68 @@ class MessageService
     protected $requestService;
 
     /**
-     * @var GetMessagesRequestDataTransformer
+     * @var MessageDataTransformerFactory
      */
-    protected $getMessagesRequestDataTransformer;
+    protected $transformerFactory;
 
     /**
-     * @var GetMessagesResponseDataTransformer
+     * @var MessageConfigurationFactory
      */
-    protected $getMessagesResponseDataTransformer;
+    protected $configurationFactory;
 
     /**
      * MessageService constructor.
-     * @param RequestService                     $requestService
-     * @param GetMessagesRequestDataTransformer  $getMessagesRequestDataTransformer
-     * @param GetMessagesResponseDataTransformer $getMessagesResponseDataTransformer
+     * @param RequestService                $requestService
+     * @param MessageDataTransformerFactory $transformerFactory
+     * @param MessageConfigurationFactory   $configurationFactory
      */
     public function __construct(
         RequestService $requestService,
-        GetMessagesRequestDataTransformer $getMessagesRequestDataTransformer,
-        GetMessagesResponseDataTransformer $getMessagesResponseDataTransformer
+        MessageDataTransformerFactory $transformerFactory,
+        MessageConfigurationFactory $configurationFactory
     ) {
         $this->requestService = $requestService;
-        $this->getMessagesRequestDataTransformer = $getMessagesRequestDataTransformer;
-        $this->getMessagesResponseDataTransformer = $getMessagesResponseDataTransformer;
+        $this->transformerFactory = $transformerFactory;
+        $this->configurationFactory = $configurationFactory;
     }
 
     /**
-     * @param GetMessagesRequest $request
-     * @return GetMessagesResponse
+     * @param AddMessageRequest $request
+     * @return MessageResponse
      */
-    public function get(GetMessagesRequest $request)
+    public function add(AddMessageRequest $request)
     {
-        $processor = new Processor();
-        $configuration = new GetMessagesRequestConfiguration();
-        $params = $this->getMessagesRequestDataTransformer->transform($request);
+        $transformer = $this->transformerFactory->get(MessageDataTransformerFactory::REQUEST_ADD);
+        $configuration = $this->configurationFactory->get(MessageConfigurationFactory::CONFIGURATION_ADD);
 
         try {
-            $params = $processor->processConfiguration($configuration, ['params' => array_filter($params)]);
+            $params = $this->checkRequest($request, $transformer, $configuration);
+        } catch (InvalidConfigurationException $exception) {
+            throw new InvalidConfigurationException($exception->getMessage());
+        }
+
+        $result = $this->requestService->post("cases/{$params['case_id']}/messages", $params);
+
+        return $this->transformerFactory->get(MessageDataTransformerFactory::RESPONSE_VIEW)->transform($result);
+    }
+
+    /**
+     * @param ListMessageRequest $request
+     * @return ListMessageResponse
+     */
+    public function lists(ListMessageRequest $request)
+    {
+        $transformer = $this->transformerFactory->get(MessageDataTransformerFactory::REQUEST_LIST);
+        $configuration = $this->configurationFactory->get(MessageConfigurationFactory::CONFIGURATION_LIST);
+
+        try {
+            $params = $this->checkRequest($request, $transformer, $configuration);
         } catch (InvalidConfigurationException $exception) {
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
         $result = $this->requestService->get("cases/{$params['case_id']}/messages", $params);
 
-        return $this->getMessagesResponseDataTransformer->transform($result);
+        return $this->transformerFactory->get(MessageDataTransformerFactory::RESPONSE_LIST)->transform($result);
     }
 }

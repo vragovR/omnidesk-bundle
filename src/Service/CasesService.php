@@ -1,27 +1,23 @@
 <?php
 namespace OmnideskBundle\Service;
 
-use OmnideskBundle\Configuration\CreateCasesRequestConfiguration;
-use OmnideskBundle\Configuration\GetCasesRequestConfiguration;
-use OmnideskBundle\Configuration\ViewCasesRequestConfiguration;
-use OmnideskBundle\DataTransformer\Request\CreateCasesRequestDataTransformer;
-use OmnideskBundle\DataTransformer\Request\GetCasesRequestDataTransformer;
-use OmnideskBundle\DataTransformer\Request\ViewCasesRequestDataTransformer;
-use OmnideskBundle\DataTransformer\Response\CasesResponseDataTransformer;
-use OmnideskBundle\DataTransformer\Response\GetCasesResponseDataTransformer;
-use OmnideskBundle\Request\Cases\CreateCasesRequest;
-use OmnideskBundle\Request\Cases\GetCasesRequest;
+use GuzzleHttp\Exception\ClientException;
+use OmnideskBundle\Exception\CasesNotFoundException;
+use OmnideskBundle\Factory\CasesConfigurationFactory;
+use OmnideskBundle\Factory\CasesDataTransformerFactory;
+use OmnideskBundle\Request\Cases\AddCasesRequest;
+use OmnideskBundle\Request\Cases\EditCasesRequest;
+use OmnideskBundle\Request\Cases\ListCasesRequest;
 use OmnideskBundle\Request\Cases\ViewCasesRequest;
 use OmnideskBundle\Response\Cases\CasesResponse;
 use OmnideskBundle\Response\Cases\GetCasesResponse;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\Config\Definition\Processor;
 
 /**
  * Class CasesService
  * @package OmnideskBundle\Service
  */
-class CasesService
+class CasesService extends AbstractService
 {
     /**
      * @var RequestService
@@ -29,96 +25,89 @@ class CasesService
     protected $requestService;
 
     /**
-     * @var CreateCasesRequestDataTransformer
+     * @var CasesDataTransformerFactory
      */
-    protected $createCasesRequestDataTransformer;
+    protected $transformerFactory;
 
     /**
-     * @var GetCasesRequestDataTransformer
+     * @var CasesConfigurationFactory
      */
-    protected $getCasesRequestDataTransformer;
-
-    /**
-     * @var ViewCasesRequestDataTransformer
-     */
-    protected $viewCasesRequestDataTransformer;
-
-    /**
-     * @var CasesResponseDataTransformer
-     */
-    protected $casesResponseDataTransformer;
-
-    /**
-     * @var GetCasesResponseDataTransformer
-     */
-    protected $getCasesResponseDataTransformer;
+    protected $configurationFactory;
 
     /**
      * CasesService constructor.
-     * @param RequestService                    $requestService
-     * @param CreateCasesRequestDataTransformer $createCasesRequestDataTransformer
-     * @param GetCasesRequestDataTransformer    $getCasesRequestDataTransformer
-     * @param ViewCasesRequestDataTransformer   $viewCasesRequestDataTransformer
-     * @param CasesResponseDataTransformer      $casesResponseDataTransformer
-     * @param GetCasesResponseDataTransformer   $getCasesResponseDataTransformer
+     * @param RequestService              $requestService
+     * @param CasesDataTransformerFactory $transformerFactory
+     * @param CasesConfigurationFactory   $configurationFactory
      */
     public function __construct(
         RequestService $requestService,
-        CreateCasesRequestDataTransformer $createCasesRequestDataTransformer,
-        GetCasesRequestDataTransformer $getCasesRequestDataTransformer,
-        ViewCasesRequestDataTransformer $viewCasesRequestDataTransformer,
-        CasesResponseDataTransformer $casesResponseDataTransformer,
-        GetCasesResponseDataTransformer $getCasesResponseDataTransformer
+        CasesDataTransformerFactory $transformerFactory,
+        CasesConfigurationFactory $configurationFactory
     ) {
         $this->requestService = $requestService;
-        $this->createCasesRequestDataTransformer = $createCasesRequestDataTransformer;
-        $this->getCasesRequestDataTransformer = $getCasesRequestDataTransformer;
-        $this->viewCasesRequestDataTransformer = $viewCasesRequestDataTransformer;
-        $this->casesResponseDataTransformer = $casesResponseDataTransformer;
-        $this->getCasesResponseDataTransformer = $getCasesResponseDataTransformer;
-
+        $this->transformerFactory = $transformerFactory;
+        $this->configurationFactory = $configurationFactory;
     }
 
     /**
-     * @param CreateCasesRequest $request
+     * @param AddCasesRequest $request
      * @return CasesResponse
      */
-    public function create(CreateCasesRequest $request)
+    public function add(AddCasesRequest $request)
     {
-        $processor = new Processor();
-        $configuration = new CreateCasesRequestConfiguration();
-        $params = $this->createCasesRequestDataTransformer->transform($request);
+        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::REQUEST_ADD);
+        $configuration = $this->configurationFactory->get(CasesConfigurationFactory::CONFIGURATION_ADD);
 
         try {
-            $params = $processor->processConfiguration($configuration, ['params' => array_filter($params)]);
+            $params = $this->checkRequest($request, $transformer, $configuration);
         } catch (InvalidConfigurationException $exception) {
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
         $result = $this->requestService->post('cases', $params);
 
-        return $this->casesResponseDataTransformer->transform($result);
+        return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
 
     /**
-     * @param GetCasesRequest $request
-     * @return GetCasesResponse
+     * @param EditCasesRequest $request
+     * @return CasesResponse
      */
-    public function get(GetCasesRequest $request)
+    public function edit(EditCasesRequest $request)
     {
-        $processor = new Processor();
-        $configuration = new GetCasesRequestConfiguration();
-        $params = $this->getCasesRequestDataTransformer->transform($request);
+        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::REQUEST_EDIT);
+        $configuration = $this->configurationFactory->get(CasesConfigurationFactory::CONFIGURATION_EDIT);
 
         try {
-            $params = $processor->processConfiguration($configuration, ['params' => array_filter($params)]);
+            $params = $this->checkRequest($request, $transformer, $configuration);
+        } catch (InvalidConfigurationException $exception) {
+            throw new InvalidConfigurationException($exception->getMessage());
+        }
+
+        $result = $this->requestService->put("cases/{$params['case_id']}", $params);
+
+        return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
+    }
+
+    /**
+     * @param ListCasesRequest $request
+     * @return GetCasesResponse
+     */
+    public function lists(ListCasesRequest $request)
+    {
+        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::REQUEST_LIST);
+        $configuration = $this->configurationFactory->get(CasesConfigurationFactory::CONFIGURATION_LIST);
+
+        try {
+            $params = $this->checkRequest($request, $transformer, $configuration);
         } catch (InvalidConfigurationException $exception) {
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
         $result = $this->requestService->get('cases', $params);
 
-        return $this->getCasesResponseDataTransformer->transform($result);
+        return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_LIST)->transform($result);
     }
 
     /**
@@ -127,18 +116,102 @@ class CasesService
      */
     public function view(ViewCasesRequest $request)
     {
-        $processor = new Processor();
-        $configuration = new ViewCasesRequestConfiguration();
-        $params = $this->viewCasesRequestDataTransformer->transform($request);
+        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::REQUEST_VIEW);
+        $configuration = $this->configurationFactory->get(CasesConfigurationFactory::CONFIGURATION_VIEW);
 
         try {
-            $params = $processor->processConfiguration($configuration, ['params' => array_filter($params)]);
+            $params = $this->checkRequest($request, $transformer, $configuration);
         } catch (InvalidConfigurationException $exception) {
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->get("cases/{$params['case_id']}", []);
+        $result = $this->requestService->get("cases/{$params['case_id']}");
 
-        return $this->casesResponseDataTransformer->transform($result);
+        return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
+    }
+
+    /**
+     * @param ViewCasesRequest $request
+     * @return CasesResponse
+     * @throws CasesNotFoundException
+     */
+    public function trash(ViewCasesRequest $request)
+    {
+        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::REQUEST_VIEW);
+        $configuration = $this->configurationFactory->get(CasesConfigurationFactory::CONFIGURATION_VIEW);
+
+        try {
+            $params = $this->checkRequest($request, $transformer, $configuration);
+        } catch (InvalidConfigurationException $exception) {
+            throw new InvalidConfigurationException($exception->getMessage());
+        }
+
+        $result = $this->requestService->put("cases/{$params['case_id']}/trash");
+
+        return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
+    }
+
+    /**
+     * @param ViewCasesRequest $request
+     * @return CasesResponse
+     * @throws CasesNotFoundException
+     */
+    public function spam(ViewCasesRequest $request)
+    {
+        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::REQUEST_VIEW);
+        $configuration = $this->configurationFactory->get(CasesConfigurationFactory::CONFIGURATION_VIEW);
+
+        try {
+            $params = $this->checkRequest($request, $transformer, $configuration);
+        } catch (InvalidConfigurationException $exception) {
+            throw new InvalidConfigurationException($exception->getMessage());
+        }
+
+        $result = $this->requestService->put("cases/{$params['case_id']}/spam");
+
+        return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
+    }
+
+    /**
+     * @param ViewCasesRequest $request
+     * @return CasesResponse
+     * @throws CasesNotFoundException
+     */
+    public function restore(ViewCasesRequest $request)
+    {
+        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::REQUEST_VIEW);
+        $configuration = $this->configurationFactory->get(CasesConfigurationFactory::CONFIGURATION_VIEW);
+
+        try {
+            $params = $this->checkRequest($request, $transformer, $configuration);
+        } catch (InvalidConfigurationException $exception) {
+            throw new InvalidConfigurationException($exception->getMessage());
+        }
+
+        $result = $this->requestService->put("cases/{$params['case_id']}/restore");
+
+        return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
+    }
+
+    /**
+     * @param ViewCasesRequest $request
+     * @throws CasesNotFoundException
+     */
+    public function delete(ViewCasesRequest $request)
+    {
+        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::REQUEST_VIEW);
+        $configuration = $this->configurationFactory->get(CasesConfigurationFactory::CONFIGURATION_VIEW);
+
+        try {
+            $params = $this->checkRequest($request, $transformer, $configuration);
+        } catch (InvalidConfigurationException $exception) {
+            throw new InvalidConfigurationException($exception->getMessage());
+        }
+
+        try {
+            $this->requestService->delete("cases/{$params['case_id']}");
+        } catch (ClientException $exception) {
+            throw $exception;
+        }
     }
 }

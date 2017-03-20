@@ -2,15 +2,14 @@
 namespace OmnideskBundle\DataTransformer\Response;
 
 use OmnideskBundle\DataTransformer\Entity\MessageDataTransformer;
-use OmnideskBundle\Response\Cases\GetCasesResponse;
-use OmnideskBundle\Response\Message\GetMessagesResponse;
+use OmnideskBundle\Response\Message\MessageResponse;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class GetMessageResponseDataTransformer
+ * Class ViewMessageResponseDataTransformer
  * @package OmnideskBundle\DataTransformer\Response
  */
-class GetMessagesResponseDataTransformer implements DataTransformerInterface
+class ViewMessageResponseDataTransformer implements DataTransformerInterface
 {
     /**
      * @var MessageDataTransformer
@@ -18,7 +17,7 @@ class GetMessagesResponseDataTransformer implements DataTransformerInterface
     protected $messageDataTransformer;
 
     /**
-     * GetCasesResponseDataTransformer constructor.
+     * MessageDataTransformer constructor.
      * @param MessageDataTransformer $messageDataTransformer
      */
     public function __construct(MessageDataTransformer $messageDataTransformer)
@@ -28,25 +27,21 @@ class GetMessagesResponseDataTransformer implements DataTransformerInterface
 
     /**
      * @param array $value
-     * @return GetMessagesResponse
+     * @return MessageResponse
      */
     public function transform($value)
     {
-        $response = new GetMessagesResponse();
+        $response = new MessageResponse();
 
-        foreach ($value as $item) {
-            if (isset($item['message'])) {
-                $response->addMessage($this->messageDataTransformer->transform($item['message']));
-            }
-        }
+        $message = $this->messageDataTransformer->transform($value['message']);
 
-        $response->setTotalCount($value['total_count']);
+        $response->setMessage($message);
 
         return $response;
     }
 
     /**
-     * @param GetCasesResponse $value
+     * @param MessageResponse $value
      * @return array
      */
     public function reverseTransform($value)

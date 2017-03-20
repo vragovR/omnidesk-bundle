@@ -1,17 +1,17 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Request;
 
-use OmnideskBundle\Request\Message\GetMessagesRequest;
+use OmnideskBundle\Request\Message\ListMessageRequest;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * Class GetMessageRequestDataTransformer
+ * Class ListMessagesRequestDataTransformer
  * @package OmnideskBundle\DataTransformer\Request
  */
-class GetMessagesRequestDataTransformer implements DataTransformerInterface
+class ListMessageRequestDataTransformer implements DataTransformerInterface
 {
     /**
-     * @param GetMessagesRequest $value
+     * @param ListMessageRequest $value
      * @return array
      */
     public function transform($value)
@@ -26,7 +26,7 @@ class GetMessagesRequestDataTransformer implements DataTransformerInterface
 
     /**
      * @param array $value
-     * @return GetMessagesRequest
+     * @return ListMessageRequest
      */
     public function reverseTransform($value)
     {
