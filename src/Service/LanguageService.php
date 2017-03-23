@@ -1,7 +1,7 @@
 <?php
 namespace OmnideskBundle\Service;
 
-use OmnideskBundle\DataTransformer\Response\ListLanguageResponseDataTransformer;
+use OmnideskBundle\DataTransformer\Response\Language\ListLanguageResponseDataTransformer;
 use OmnideskBundle\Response\Language\GetLanguageResponse;
 
 /**

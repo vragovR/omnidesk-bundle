@@ -1,8 +1,8 @@
 <?php
 namespace OmnideskBundle\Service;
 
-use OmnideskBundle\Factory\MessageConfigurationFactory;
-use OmnideskBundle\Factory\MessageDataTransformerFactory;
+use OmnideskBundle\Factory\Message\MessageConfigurationFactory;
+use OmnideskBundle\Factory\Message\MessageDataTransformerFactory;
 use OmnideskBundle\Request\Message\AddMessageRequest;
 use OmnideskBundle\Request\Message\ListMessageRequest;
 use OmnideskBundle\Response\Message\ListMessageResponse;

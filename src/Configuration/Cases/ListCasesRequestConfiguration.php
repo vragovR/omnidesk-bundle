@@ -1,5 +1,5 @@
 <?php
-namespace OmnideskBundle\Configuration;
+namespace OmnideskBundle\Configuration\Cases;
 
 use OmnideskBundle\Entity\Cases;
 use OmnideskBundle\Request\Cases\ListCasesRequest;
@@ -7,8 +7,8 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Class CreateCasesConfiguration
- * @package OmnideskBundle\Configuration\Request
+ * Class ListCasesRequestConfiguration
+ * @package OmnideskBundle\Configuration\Cases
  */
 class ListCasesRequestConfiguration implements ConfigurationInterface
 {

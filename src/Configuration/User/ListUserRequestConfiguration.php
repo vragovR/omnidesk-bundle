@@ -1,15 +1,25 @@
 <?php
-namespace OmnideskBundle\Configuration;
+namespace OmnideskBundle\Configuration\User;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Class EditCasesRequestConfiguration
- * @package OmnideskBundle\Configuration
+ * Class ListUserRequestConfiguration
+ * @package OmnideskBundle\Configuration\User
  */
-class EditCasesRequestConfiguration implements ConfigurationInterface
+class ListUserRequestConfiguration implements ConfigurationInterface
 {
+    /**
+     * @var int
+     */
+    const DEFAULT_PAGE = 1;
+
+    /**
+     * @var int
+     */
+    const DEFAULT_LIMIT = 100;
+
     /**
      * @return TreeBuilder
      */
@@ -21,19 +31,16 @@ class EditCasesRequestConfiguration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->integerNode('case_id')
-                    ->isRequired()
+                ->integerNode('page')
+                    ->defaultValue(self::DEFAULT_PAGE)
                 ->end()
-                ->scalarNode('subject')
+                ->integerNode('limit')
+                    ->defaultValue(self::DEFAULT_LIMIT)
+                ->end()
+                ->scalarNode('user_email')
                     ->defaultNull()
                 ->end()
-                ->integerNode('group_id')
-                    ->defaultNull()
-                ->end()
-                ->integerNode('staff_id')
-                    ->defaultNull()
-                ->end()
-                ->scalarNode('priority')
+                ->scalarNode('user_phone')
                     ->defaultNull()
                 ->end()
                 ->integerNode('language_id')
@@ -41,9 +48,8 @@ class EditCasesRequestConfiguration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('custom_fields')
                 ->end()
-                ->arrayNode('add_labels')
-                ->end()
-                ->arrayNode('delete_labels')
+                ->booleanNode('amount_of_cases')
+                    ->defaultFalse()
                 ->end()
             ->end();
 

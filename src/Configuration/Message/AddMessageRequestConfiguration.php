@@ -1,12 +1,12 @@
 <?php
-namespace OmnideskBundle\Configuration;
+namespace OmnideskBundle\Configuration\Message;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Class ListMessageRequestConfiguration
- * @package OmnideskBundle\Configuration
+ * Class AddMessageRequestConfiguration
+ * @package OmnideskBundle\Configuration\Message
  */
 class AddMessageRequestConfiguration implements ConfigurationInterface
 {

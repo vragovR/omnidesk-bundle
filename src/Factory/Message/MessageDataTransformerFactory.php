@@ -1,59 +1,20 @@
 <?php
-namespace OmnideskBundle\Factory;
+namespace OmnideskBundle\Factory\Message;
 
-use OmnideskBundle\DataTransformer\Request\AddMessageRequestDataTransformer;
-use OmnideskBundle\DataTransformer\Request\ListMessageRequestDataTransformer;
-use OmnideskBundle\DataTransformer\Response\ListMessageResponseDataTransformer;
-use OmnideskBundle\DataTransformer\Response\ViewMessageResponseDataTransformer;
+use OmnideskBundle\DataTransformer\Request\Message\AddMessageRequestDataTransformer;
+use OmnideskBundle\DataTransformer\Request\Message\ListMessageRequestDataTransformer;
+use OmnideskBundle\DataTransformer\Response\Message\ListMessageResponseDataTransformer;
+use OmnideskBundle\DataTransformer\Response\Message\ViewMessageResponseDataTransformer;
 use OmnideskBundle\Exception\BadDataTransformerFactoryException;
+use OmnideskBundle\Factory\AbstractDataTransformerFactory;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class MessageDataTransformerFactory
- * @package OmnideskBundle\Factory
+ * @package OmnideskBundle\Factory\Message
  */
-class MessageDataTransformerFactory
+class MessageDataTransformerFactory extends AbstractDataTransformerFactory
 {
-    /**
-     * @var string
-     */
-    const REQUEST_ADD = 'request-add';
-
-    /**
-     * @var string
-     */
-    const REQUEST_LIST = 'request-list';
-
-    /**
-     * @var string
-     */
-    const RESPONSE_LIST = 'response-list';
-
-    /**
-     * @var string
-     */
-    const RESPONSE_VIEW = 'response-view';
-
-    /**
-     * @var AddMessageRequestDataTransformer
-     */
-    protected $addRequest;
-
-    /**
-     * @var ListMessageRequestDataTransformer
-     */
-    protected $listRequest;
-
-    /**
-     * @var ListMessageResponseDataTransformer
-     */
-    protected $listResponse;
-
-    /**
-     * @var ViewMessageResponseDataTransformer
-     */
-    protected $viewResponse;
-
     /**
      * CasesService constructor.
      * @param AddMessageRequestDataTransformer   $addRequest

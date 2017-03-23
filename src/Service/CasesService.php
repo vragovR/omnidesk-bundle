@@ -3,8 +3,8 @@ namespace OmnideskBundle\Service;
 
 use GuzzleHttp\Exception\ClientException;
 use OmnideskBundle\Exception\CasesNotFoundException;
-use OmnideskBundle\Factory\CasesConfigurationFactory;
-use OmnideskBundle\Factory\CasesDataTransformerFactory;
+use OmnideskBundle\Factory\Cases\CasesConfigurationFactory;
+use OmnideskBundle\Factory\Cases\CasesDataTransformerFactory;
 use OmnideskBundle\Request\Cases\AddCasesRequest;
 use OmnideskBundle\Request\Cases\EditCasesRequest;
 use OmnideskBundle\Request\Cases\ListCasesRequest;

@@ -1,37 +1,18 @@
 <?php
-namespace OmnideskBundle\Factory;
+namespace OmnideskBundle\Factory\Message;
 
-use OmnideskBundle\Configuration\AddMessageRequestConfiguration;
-use OmnideskBundle\Configuration\ListMessageRequestConfiguration;
+use OmnideskBundle\Configuration\Message\AddMessageRequestConfiguration;
+use OmnideskBundle\Configuration\Message\ListMessageRequestConfiguration;
 use OmnideskBundle\Exception\BadConfigurationFactoryException;
+use OmnideskBundle\Factory\AbstractConfigurationFactory;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Class MessageConfigurationFactory
- * @package OmnideskBundle\Factory
+ * @package OmnideskBundle\Factory\Message
  */
-class MessageConfigurationFactory
+class MessageConfigurationFactory extends AbstractConfigurationFactory
 {
-    /**
-     * @var string
-     */
-    const CONFIGURATION_ADD = 'add';
-
-    /**
-     * @var string
-     */
-    const CONFIGURATION_LIST = 'list';
-
-    /**
-     * @var AddMessageRequestConfiguration
-     */
-    protected $addConfiguration;
-
-    /**
-     * @var ListMessageRequestConfiguration
-     */
-    protected $listConfiguration;
-
     /**
      * MessageConfigurationFactory constructor.
      * @param AddMessageRequestConfiguration  $addConfiguration

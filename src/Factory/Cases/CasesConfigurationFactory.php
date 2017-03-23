@@ -1,59 +1,20 @@
 <?php
-namespace OmnideskBundle\Factory;
+namespace OmnideskBundle\Factory\Cases;
 
-use OmnideskBundle\Configuration\AddCasesRequestConfiguration;
-use OmnideskBundle\Configuration\EditCasesRequestConfiguration;
-use OmnideskBundle\Configuration\ListCasesRequestConfiguration;
-use OmnideskBundle\Configuration\ViewCasesRequestConfiguration;
+use OmnideskBundle\Configuration\Cases\AddCasesRequestConfiguration;
+use OmnideskBundle\Configuration\Cases\EditCasesRequestConfiguration;
+use OmnideskBundle\Configuration\Cases\ListCasesRequestConfiguration;
+use OmnideskBundle\Configuration\Cases\ViewCasesRequestConfiguration;
 use OmnideskBundle\Exception\BadConfigurationFactoryException;
+use OmnideskBundle\Factory\AbstractConfigurationFactory;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Class CasesConfigurationFactory
- * @package OmnideskBundle\Factory
+ * @package OmnideskBundle\Factory\Cases
  */
-class CasesConfigurationFactory
+class CasesConfigurationFactory extends AbstractConfigurationFactory
 {
-    /**
-     * @var string
-     */
-    const CONFIGURATION_ADD = 'add';
-
-    /**
-     * @var string
-     */
-    const CONFIGURATION_EDIT = 'edit';
-
-    /**
-     * @var string
-     */
-    const CONFIGURATION_LIST = 'list';
-
-    /**
-     * @var string
-     */
-    const CONFIGURATION_VIEW = 'view';
-
-    /**
-     * @var AddCasesRequestConfiguration
-     */
-    protected $addConfiguration;
-
-    /**
-     * @var EditCasesRequestConfiguration
-     */
-    protected $editConfiguration;
-
-    /**
-     * @var ListCasesRequestConfiguration
-     */
-    protected $listConfiguration;
-
-    /**
-     * @var ViewCasesRequestConfiguration
-     */
-    protected $viewConfiguration;
-
     /**
      * CasesConfigurationFactory constructor.
      * @param AddCasesRequestConfiguration  $addConfiguration

@@ -1,14 +1,14 @@
 <?php
-namespace OmnideskBundle\Configuration;
+namespace OmnideskBundle\Configuration\User;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Class CreateCasesConfiguration
- * @package OmnideskBundle\Configuration\Request
+ * Class ViewUserRequestConfiguration
+ * @package OmnideskBundle\Configuration\User
  */
-class ViewCasesRequestConfiguration implements ConfigurationInterface
+class ViewUserRequestConfiguration implements ConfigurationInterface
 {
     /**
      * @return TreeBuilder
@@ -21,7 +21,7 @@ class ViewCasesRequestConfiguration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->integerNode('case_id')
+                ->integerNode('user_id')
                     ->isRequired()
                 ->end()
             ->end();

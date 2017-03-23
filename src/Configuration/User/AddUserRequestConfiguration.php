@@ -1,14 +1,14 @@
 <?php
-namespace OmnideskBundle\Configuration;
+namespace OmnideskBundle\Configuration\User;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Class GetCasesRequestConfiguration
- * @package OmnideskBundle\Configuration
+ * Class AddUserRequestConfiguration
+ * @package OmnideskBundle\Configuration\User
  */
-class AddCasesRequestConfiguration implements ConfigurationInterface
+class AddUserRequestConfiguration implements ConfigurationInterface
 {
     /**
      * @return TreeBuilder
@@ -32,34 +32,19 @@ class AddCasesRequestConfiguration implements ConfigurationInterface
                 ->scalarNode('user_full_name')
                     ->defaultNull()
                 ->end()
-                ->scalarNode('subject')
-                    ->isRequired()
-                    ->cannotBeEmpty()
+                ->scalarNode('company_name')
+                    ->defaultNull()
                 ->end()
-                ->scalarNode('content')
-                    ->isRequired()
-                    ->cannotBeEmpty()
+                ->scalarNode('company_position')
+                    ->defaultNull()
                 ->end()
-                ->scalarNode('content_html')
-                    ->isRequired()
-                    ->cannotBeEmpty()
-                ->end()
-                ->scalarNode('group_id')
+                ->scalarNode('user_note')
                     ->defaultNull()
                 ->end()
                 ->scalarNode('language_id')
                     ->defaultNull()
                 ->end()
                 ->arrayNode('custom_fields')
-                ->end()
-                ->arrayNode('labels')
-                ->end()
-                ->arrayNode('case')
-                    ->children()
-                        ->arrayNode('attachments')
-                            ->prototype('scalar')
-                        ->end()
-                    ->end()
                 ->end()
             ->end();
 
