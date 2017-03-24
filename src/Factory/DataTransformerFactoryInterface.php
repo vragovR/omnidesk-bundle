@@ -1,7 +1,7 @@
 <?php
 namespace OmnideskBundle\Factory;
 
-use Symfony\Component\Form\DataTransformerInterface;
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 
 /**
  * Interface DataTransformerFactoryInterface

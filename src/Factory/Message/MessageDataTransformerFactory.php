@@ -1,13 +1,13 @@
 <?php
 namespace OmnideskBundle\Factory\Message;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\DataTransformer\Request\Message\AddMessageRequestDataTransformer;
 use OmnideskBundle\DataTransformer\Request\Message\ListMessageRequestDataTransformer;
 use OmnideskBundle\DataTransformer\Response\Message\ListMessageResponseDataTransformer;
 use OmnideskBundle\DataTransformer\Response\Message\ViewMessageResponseDataTransformer;
 use OmnideskBundle\Exception\BadDataTransformerFactoryException;
 use OmnideskBundle\Factory\AbstractDataTransformerFactory;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class MessageDataTransformerFactory

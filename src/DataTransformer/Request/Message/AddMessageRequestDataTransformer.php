@@ -1,8 +1,8 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Request\Message;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Request\Message\AddMessageRequest;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class AddMessagesRequestDataTransformer

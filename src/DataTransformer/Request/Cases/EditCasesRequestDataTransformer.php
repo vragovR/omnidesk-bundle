@@ -1,8 +1,8 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Request\Cases;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Request\Cases\EditCasesRequest;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class EditCasesRequestDataTransformer

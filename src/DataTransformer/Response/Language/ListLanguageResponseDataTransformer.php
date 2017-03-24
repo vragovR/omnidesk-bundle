@@ -1,9 +1,9 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Response\Language;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\DataTransformer\Entity\LanguageDataTransformer;
 use OmnideskBundle\Response\Language\GetLanguageResponse;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class ListLanguageResponseDataTransformer

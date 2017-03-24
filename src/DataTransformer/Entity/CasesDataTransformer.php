@@ -1,8 +1,8 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Entity;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Entity\Cases;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class CasesDataTransformer

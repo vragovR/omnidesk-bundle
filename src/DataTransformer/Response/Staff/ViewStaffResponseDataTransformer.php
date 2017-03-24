@@ -1,9 +1,9 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Response\Staff;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\DataTransformer\Entity\StaffDataTransformer;
 use OmnideskBundle\Response\Staff\StaffResponse;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class ViewStaffResponseDataTransformer

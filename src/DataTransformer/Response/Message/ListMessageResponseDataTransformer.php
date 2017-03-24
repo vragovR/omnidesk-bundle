@@ -1,9 +1,9 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Response\Message;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\DataTransformer\Entity\MessageDataTransformer;
 use OmnideskBundle\Response\Message\ListMessageResponse;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class ListMessageResponseDataTransformer

@@ -1,8 +1,8 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Request\Staff;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Request\Staff\ViewStaffRequest;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class ViewStaffRequestDataTransformer

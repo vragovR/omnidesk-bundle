@@ -1,8 +1,8 @@
 <?php
 namespace OmnideskBundle\Factory;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Exception\BadDataTransformerFactoryException;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class AbstractDataTransformerFactory

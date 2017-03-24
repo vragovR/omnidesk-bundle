@@ -1,9 +1,9 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Request\Cases;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Request\Cases\AddCasesRequest;
 use OmnideskBundle\Request\Cases\ListCasesRequest;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class ListCasesRequestDataTransformer

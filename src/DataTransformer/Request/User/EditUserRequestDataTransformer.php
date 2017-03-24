@@ -1,8 +1,8 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Request\User;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Request\User\EditUserRequest;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class EditUserRequestDataTransformer

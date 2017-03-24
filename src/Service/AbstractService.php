@@ -1,10 +1,10 @@
 <?php
 namespace OmnideskBundle\Service;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Request\RequestInterface;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class AbstractService

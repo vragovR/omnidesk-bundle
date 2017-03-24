@@ -1,9 +1,9 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Response\User;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\DataTransformer\Entity\UserDataTransformer;
 use OmnideskBundle\Response\User\UserResponse;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class ViewUserResponseDataTransformer

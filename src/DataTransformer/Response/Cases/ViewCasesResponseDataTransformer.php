@@ -1,9 +1,9 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Response\Cases;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\DataTransformer\Entity\CasesDataTransformer;
 use OmnideskBundle\Response\Cases\CasesResponse;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class ViewCasesResponseDataTransformer

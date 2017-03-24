@@ -1,8 +1,8 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Entity;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Entity\Language;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class LanguageDataTransformer

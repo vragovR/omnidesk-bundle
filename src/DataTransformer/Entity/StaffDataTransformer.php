@@ -1,8 +1,8 @@
 <?php
 namespace OmnideskBundle\DataTransformer\Entity;
 
+use OmnideskBundle\DataTransformer\DataTransformerInterface;
 use OmnideskBundle\Entity\Staff;
-use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * Class StaffDataTransformer
