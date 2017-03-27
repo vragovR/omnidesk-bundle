@@ -23,6 +23,18 @@ services:
     arguments:
       - "@omnidesk.service.request"
       - "@omnidesk.transformer.response.language.list"
+  omnidesk.service.user:
+    class: OmnideskBundle\Service\UserService
+    arguments:
+      - "@omnidesk.service.request"
+      - "@omnidesk.factory.user.transformer"
+      - "@omnidesk.factory.user.configuration"
+  omnidesk.service.staff:
+    class: OmnideskBundle\Service\StaffService
+    arguments:
+      - "@omnidesk.service.request"
+      - "@omnidesk.factory.staff.transformer"
+      - "@omnidesk.factory.staff.configuration"
   # Factory
   omnidesk.factory.cases.transformer:
     class: OmnideskBundle\Factory\Cases\CasesDataTransformerFactory

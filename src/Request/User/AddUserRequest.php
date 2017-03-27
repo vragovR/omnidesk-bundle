@@ -59,10 +59,13 @@ class AddUserRequest implements RequestInterface
 
     /**
      * @param string $email
+     * @return $this
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -75,10 +78,13 @@ class AddUserRequest implements RequestInterface
 
     /**
      * @param string $phone
+     * @return $this
      */
     public function setPhone($phone)
     {
         $this->phone = $phone;
+
+        return $this;
     }
 
     /**
@@ -91,10 +97,13 @@ class AddUserRequest implements RequestInterface
 
     /**
      * @param string $fullName
+     * @return $this
      */
     public function setFullName($fullName)
     {
         $this->fullName = $fullName;
+
+        return $this;
     }
 
     /**
@@ -107,10 +116,13 @@ class AddUserRequest implements RequestInterface
 
     /**
      * @param string $companyName
+     * @return $this
      */
     public function setCompanyName($companyName)
     {
         $this->companyName = $companyName;
+
+        return $this;
     }
 
     /**
@@ -123,10 +135,13 @@ class AddUserRequest implements RequestInterface
 
     /**
      * @param string $companyPosition
+     * @return $this
      */
     public function setCompanyPosition($companyPosition)
     {
         $this->companyPosition = $companyPosition;
+
+        return $this;
     }
 
     /**
@@ -139,10 +154,13 @@ class AddUserRequest implements RequestInterface
 
     /**
      * @param string $note
+     * @return $this
      */
     public function setNote($note)
     {
         $this->note = $note;
+
+        return $this;
     }
 
     /**
@@ -155,10 +173,13 @@ class AddUserRequest implements RequestInterface
 
     /**
      * @param int $languageId
+     * @return $this
      */
     public function setLanguageId($languageId)
     {
         $this->languageId = $languageId;
+
+        return $this;
     }
 
     /**
@@ -171,9 +192,12 @@ class AddUserRequest implements RequestInterface
 
     /**
      * @param array $customFields
+     * @return $this
      */
     public function setCustomFields($customFields)
     {
         $this->customFields = $customFields;
+
+        return $this;
     }
 }

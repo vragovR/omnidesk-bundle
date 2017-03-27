@@ -34,10 +34,13 @@ class AddStaffRequest implements RequestInterface
 
     /**
      * @param string $email
+     * @return $this
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -50,10 +53,13 @@ class AddStaffRequest implements RequestInterface
 
     /**
      * @param string $fullName
+     * @return $this
      */
     public function setFullName($fullName)
     {
         $this->fullName = $fullName;
+
+        return $this;
     }
 
     /**
@@ -66,9 +72,12 @@ class AddStaffRequest implements RequestInterface
 
     /**
      * @param string $signature
+     * @return $this
      */
     public function setSignature($signature)
     {
         $this->signature = $signature;
+
+        return $this;
     }
 }

@@ -7,73 +7,14 @@ use OmnideskBundle\DataTransformer\Request\Staff\ListStaffRequestDataTransformer
 use OmnideskBundle\DataTransformer\Request\Staff\ViewStaffRequestDataTransformer;
 use OmnideskBundle\DataTransformer\Response\Staff\ListStaffResponseDataTransformer;
 use OmnideskBundle\DataTransformer\Response\Staff\ViewStaffResponseDataTransformer;
+use OmnideskBundle\Factory\AbstractDataTransformerFactory;
 
 /**
  * Class StaffDataTransformerFactory
  * @package OmnideskBundle\Factory\Staff
  */
-class StaffDataTransformerFactory
+class StaffDataTransformerFactory extends AbstractDataTransformerFactory
 {
-    /**
-     * @var string
-     */
-    const REQUEST_ADD = 'request-add';
-
-    /**
-     * @var string
-     */
-    const REQUEST_EDIT = 'request-edit';
-
-    /**
-     * @var string
-     */
-    const REQUEST_VIEW = 'request-view';
-
-    /**
-     * @var string
-     */
-    const REQUEST_LIST = 'request-list';
-
-    /**
-     * @var string
-     */
-    const RESPONSE_LIST = 'response-list';
-
-    /**
-     * @var string
-     */
-    const RESPONSE_VIEW = 'response-view';
-
-    /**
-     * @var AddStaffRequestDataTransformer
-     */
-    protected $addRequest;
-
-    /**
-     * @var EditStaffRequestDataTransformer
-     */
-    protected $editRequest;
-
-    /**
-     * @var ListStaffRequestDataTransformer
-     */
-    protected $listRequest;
-
-    /**
-     * @var ViewStaffRequestDataTransformer
-     */
-    protected $viewRequest;
-
-    /**
-     * @var ListStaffResponseDataTransformer
-     */
-    protected $listResponse;
-
-    /**
-     * @var ViewStaffResponseDataTransformer
-     */
-    protected $viewResponse;
-
     /**
      * StaffService constructor.
      * @param AddStaffRequestDataTransformer   $addRequest
