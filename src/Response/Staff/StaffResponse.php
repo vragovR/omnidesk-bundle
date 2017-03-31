@@ -10,6 +10,11 @@ use OmnideskBundle\Entity\Staff;
 class StaffResponse
 {
     /**
+     * @var string
+     */
+    const ERROR_EMAIL_ALREADY_EXIST = 'email_already_exist';
+
+    /**
      * @var Staff
      */
     private $staff;

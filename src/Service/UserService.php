@@ -63,7 +63,7 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->post('user', $params);
+        $result = $this->requestService->post('users', $params);
 
         return $this->transformerFactory->get(UserDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
@@ -83,7 +83,7 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->put("user/{$params['user_id']}", $params);
+        $result = $this->requestService->put("users/{$params['user_id']}", $params);
 
         return $this->transformerFactory->get(UserDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
@@ -103,7 +103,7 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->get('user', $params);
+        $result = $this->requestService->get('users', $params);
 
         return $this->transformerFactory->get(UserDataTransformerFactory::RESPONSE_LIST)->transform($result);
     }
@@ -123,7 +123,7 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->get("user/{$params['user_id']}");
+        $result = $this->requestService->get("users/{$params['user_id']}");
 
         return $this->transformerFactory->get(UserDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
@@ -143,7 +143,7 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->put("user/{$params['user_id']}/block");
+        $result = $this->requestService->put("users/{$params['user_id']}/block");
 
         return $this->transformerFactory->get(UserDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
@@ -163,7 +163,7 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->put("user/{$params['user_id']}/restore");
+        $result = $this->requestService->put("users/{$params['user_id']}/restore");
 
         return $this->transformerFactory->get(UserDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
@@ -183,7 +183,7 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->put("user/{$params['user_id']}/disable");
+        $result = $this->requestService->put("users/{$params['user_id']}/disable");
 
         return $this->transformerFactory->get(UserDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
@@ -202,6 +202,6 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $this->requestService->delete("user/{$params['user_id']}");
+        $this->requestService->delete("users/{$params['user_id']}");
     }
 }

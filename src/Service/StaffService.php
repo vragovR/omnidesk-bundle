@@ -1,6 +1,9 @@
 <?php
+
 namespace OmnideskBundle\Service;
 
+use GuzzleHttp\Exception\ClientException;
+use OmnideskBundle\Exception\StaffAlreadyExistException;
 use OmnideskBundle\Factory\Staff\StaffConfigurationFactory;
 use OmnideskBundle\Factory\Staff\StaffDataTransformerFactory;
 use OmnideskBundle\Request\Staff\AddStaffRequest;
@@ -51,6 +54,7 @@ class StaffService extends AbstractService
     /**
      * @param AddStaffRequest $request
      * @return StaffResponse
+     * @throws StaffAlreadyExistException
      */
     public function add(AddStaffRequest $request)
     {
@@ -63,7 +67,17 @@ class StaffService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->post('staff', $params);
+        try {
+            $result = $this->requestService->post('staff', $params);
+        } catch (ClientException $exception) {
+            $contents = json_decode($exception->getResponse()->getBody(), JSON_UNESCAPED_UNICODE);
+
+            if ($contents['error'] === StaffResponse::ERROR_EMAIL_ALREADY_EXIST) {
+                throw new StaffAlreadyExistException();
+            }
+
+            throw $exception;
+        }
 
         return $this->transformerFactory->get(StaffDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }

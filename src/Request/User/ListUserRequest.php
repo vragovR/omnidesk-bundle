@@ -54,10 +54,13 @@ class ListUserRequest implements RequestInterface
 
     /**
      * @param int $page
+     * @return $this
      */
     public function setPage($page)
     {
         $this->page = $page;
+
+        return $this;
     }
 
     /**
@@ -70,10 +73,13 @@ class ListUserRequest implements RequestInterface
 
     /**
      * @param int $limit
+     * @return $this
      */
     public function setLimit($limit)
     {
         $this->limit = $limit;
+
+        return $this;
     }
 
     /**
@@ -86,10 +92,13 @@ class ListUserRequest implements RequestInterface
 
     /**
      * @param string $email
+     * @return $this
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -102,10 +111,13 @@ class ListUserRequest implements RequestInterface
 
     /**
      * @param string $phone
+     * @return $this
      */
     public function setPhone($phone)
     {
         $this->phone = $phone;
+
+        return $this;
     }
 
     /**
@@ -118,10 +130,13 @@ class ListUserRequest implements RequestInterface
 
     /**
      * @param int $languageId
+     * @return $this
      */
     public function setLanguageId($languageId)
     {
         $this->languageId = $languageId;
+
+        return $this;
     }
 
     /**
@@ -134,10 +149,13 @@ class ListUserRequest implements RequestInterface
 
     /**
      * @param array $customFields
+     * @return $this
      */
     public function setCustomFields($customFields)
     {
         $this->customFields = $customFields;
+
+        return $this;
     }
 
     /**
@@ -150,9 +168,12 @@ class ListUserRequest implements RequestInterface
 
     /**
      * @param bool $amountOfCases
+     * @return $this
      */
     public function setAmountOfCases($amountOfCases)
     {
         $this->amountOfCases = $amountOfCases;
+
+        return $this;
     }
 }

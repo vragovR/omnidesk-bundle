@@ -21,7 +21,7 @@ class Message
     /**
      * @var int
      */
-    private $staffIf;
+    private $staffId;
 
     /**
      * @var string
@@ -89,18 +89,18 @@ class Message
     /**
      * @return int
      */
-    public function getStaffIf()
+    public function getStaffId()
     {
-        return $this->staffIf;
+        return $this->staffId;
     }
 
     /**
-     * @param int $staffIf
+     * @param int $staffId
      * @return $this
      */
-    public function setStaffIf($staffIf)
+    public function setStaffId($staffId)
     {
-        $this->staffIf = $staffIf;
+        $this->staffId = $staffId;
 
         return $this;
     }

@@ -20,7 +20,7 @@ class MessageDataTransformer implements DataTransformerInterface
         $entity
             ->setId($value['message_id'])
             ->setUserId($value['user_id'])
-            ->setStaffIf($value['staff_id'])
+            ->setStaffId($value['staff_id'])
             ->setContent($value['content'])
             ->setContentHtml($value['content_html'])
             ->setAttachments($value['attachments'])
