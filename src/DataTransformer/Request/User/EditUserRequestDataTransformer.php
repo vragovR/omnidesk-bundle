@@ -17,6 +17,7 @@ class EditUserRequestDataTransformer implements DataTransformerInterface
     public function transform($value)
     {
         return [
+            'user_id' => $value->getUserId(),
             'user_email' => $value->getEmail(),
             'user_full_name' => $value->getFullName(),
             'company_name' => $value->getCompanyName(),

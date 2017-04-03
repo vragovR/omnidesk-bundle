@@ -10,6 +10,11 @@ use OmnideskBundle\Request\RequestInterface;
 class EditStaffRequest implements RequestInterface
 {
     /**
+     * @var int
+     */
+    private $staffId;
+
+    /**
      * @var string
      */
     private $email;
@@ -23,6 +28,25 @@ class EditStaffRequest implements RequestInterface
      * @var string
      */
     private $signature;
+
+    /**
+     * @return int
+     */
+    public function getStaffId()
+    {
+        return $this->staffId;
+    }
+
+    /**
+     * @param int $staffId
+     * @return $this
+     */
+    public function setStaffId($staffId)
+    {
+        $this->staffId = $staffId;
+
+        return $this;
+    }
 
     /**
      * @return string

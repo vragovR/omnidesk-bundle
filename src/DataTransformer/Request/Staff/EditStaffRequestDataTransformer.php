@@ -17,6 +17,7 @@ class EditStaffRequestDataTransformer implements DataTransformerInterface
     public function transform($value)
     {
         return [
+            'staff_id' => $value->getStaffId(),
             'staff_email' => $value->getEmail(),
             'staff_full_name' => $value->getFullName(),
             'staff_signature' => $value->getSignature(),

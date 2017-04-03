@@ -24,9 +24,12 @@ class ViewUserRequest implements RequestInterface
 
     /**
      * @param int $userId
+     * @return $this
      */
     public function setUserId($userId)
     {
         $this->userId = $userId;
+
+        return $this;
     }
 }

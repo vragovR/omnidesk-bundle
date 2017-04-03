@@ -83,7 +83,7 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->put("users/{$params['user_id']}", $params);
+        $result = $this->requestService->put("users/{$params['user_id']}", ['user' => $params]);
 
         return $this->transformerFactory->get(UserDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }

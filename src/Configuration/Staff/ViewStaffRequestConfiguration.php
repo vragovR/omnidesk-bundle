@@ -21,7 +21,7 @@ class ViewStaffRequestConfiguration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->integerNode('staff_idd')
+                ->integerNode('staff_id')
                     ->isRequired()
                 ->end()
             ->end();

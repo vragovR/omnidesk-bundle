@@ -72,7 +72,7 @@ class RequestService
         $response = $this->client->put($this->getUrl($url), [
             'headers' => $this->getHeaders(),
             'auth' => $this->getAuth(),
-            'query' => $params,
+            'json' => $params,
         ]);
 
         return json_decode((string) $response->getBody(), true);

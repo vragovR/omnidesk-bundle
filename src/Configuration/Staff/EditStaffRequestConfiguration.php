@@ -21,6 +21,9 @@ class EditStaffRequestConfiguration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->integerNode('staff_id')
+                    ->isRequired()
+                ->end()
                 ->scalarNode('staff_email')
                     ->defaultNull()
                 ->end()
