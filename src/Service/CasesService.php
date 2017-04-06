@@ -65,7 +65,11 @@ class CasesService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->post('cases', $params);
+        if (isset($params['attachments']) && !empty($params['attachments'])) {
+            $result = $this->requestService->postFile('cases', 'case', $params);
+        } else {
+            $result = $this->requestService->post('cases', $params);
+        }
 
         return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }

@@ -52,12 +52,8 @@ class AddCasesRequestConfiguration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('labels')
                 ->end()
-                ->arrayNode('case')
-                    ->children()
-                        ->arrayNode('attachments')
-                            ->prototype('scalar')
-                        ->end()
-                    ->end()
+                ->arrayNode('attachments')
+                    ->prototype('scalar')
                 ->end()
             ->end();
 

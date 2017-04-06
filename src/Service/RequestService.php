@@ -1,4 +1,5 @@
 <?php
+
 namespace OmnideskBundle\Service;
 
 use GuzzleHttp\Client;
@@ -41,6 +42,42 @@ class RequestService
             'headers' => $this->getHeaders(),
             'auth' => $this->getAuth(),
             'query' => $params,
+        ]);
+
+        return json_decode((string) $response->getBody(), true);
+    }
+
+    /**
+     * @param string $url
+     * @param string $type
+     * @param array  $params
+     * @return array
+     */
+    public function postFile($url, $type, array $params = [])
+    {
+        $multipart = [];
+
+        foreach ($params as $key => $param) {
+            if ($key !== 'attachments') {
+                $multipart[] = [
+                    'name' => "{$type}[{$key}]",
+                    'contents' => $param,
+                ];
+            }
+        }
+
+        if (isset($params['attachments']) && $attachments = (array) $params['attachments']) {
+            foreach ($attachments as $key => $attachment) {
+                $multipart[] = [
+                    'name' => "{$type}[attachments][{$key}]",
+                    'contents' => fopen($attachment, 'rb'),
+                ];
+            }
+        }
+
+        $response = $this->client->post($this->getUrl($url), [
+            'auth' => $this->getAuth(),
+            'multipart' => $multipart,
         ]);
 
         return json_decode((string) $response->getBody(), true);

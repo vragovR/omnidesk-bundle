@@ -32,9 +32,7 @@ class AddCasesRequestDataTransformer implements DataTransformerInterface
             'language_id' => $value->getLanguageId(),
             'custom_fields' => $value->getCustomFields(),
             'labels' => $value->getLabels(),
-            'case' => [
-                'attachments' => $attachments,
-            ],
+            'attachments' => $attachments,
         ];
     }
 
