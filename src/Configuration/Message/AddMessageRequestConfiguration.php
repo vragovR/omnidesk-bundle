@@ -36,6 +36,9 @@ class AddMessageRequestConfiguration implements ConfigurationInterface
                 ->integerNode('user_id')
                     ->defaultNull()
                 ->end()
+                ->arrayNode('attachments')
+                    ->prototype('scalar')
+                ->end()
             ->end();
 
         return $treeBuilder;
