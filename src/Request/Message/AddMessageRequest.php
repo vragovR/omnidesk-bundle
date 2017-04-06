@@ -42,6 +42,14 @@ class AddMessageRequest implements RequestInterface
     private $attachments;
 
     /**
+     * AddMessageRequest constructor.
+     */
+    public function __construct()
+    {
+        $this->attachments = new ArrayCollection();
+    }
+
+    /**
      * @return int
      */
     public function getCaseId()
