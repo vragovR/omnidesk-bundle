@@ -66,7 +66,7 @@ class CasesService extends AbstractService
         }
 
         if (isset($params['attachments']) && !empty($params['attachments'])) {
-            $result = $this->requestService->postFile('cases', 'case', $params);
+            $result = $this->requestService->postMultipart('cases', 'case', $params);
         } else {
             $result = $this->requestService->post('cases', $params);
         }

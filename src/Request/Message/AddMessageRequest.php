@@ -1,7 +1,9 @@
 <?php
 namespace OmnideskBundle\Request\Message;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use OmnideskBundle\Request\RequestInterface;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class AddMessageRequest
@@ -33,6 +35,11 @@ class AddMessageRequest implements RequestInterface
      * @var int
      */
     private $userId;
+
+    /**
+     * @var ArrayCollection|File[]
+     */
+    private $attachments;
 
     /**
      * @return int
@@ -127,5 +134,21 @@ class AddMessageRequest implements RequestInterface
         $this->userId = $userId;
 
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection|File[]
+     */
+    public function getAttachments()
+    {
+        return $this->attachments;
+    }
+
+    /**
+     * @param File $attachment
+     */
+    public function addAttachment(File $attachment)
+    {
+        $this->attachments->add($attachment);
     }
 }

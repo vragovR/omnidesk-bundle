@@ -49,18 +49,18 @@ class RequestService
 
     /**
      * @param string $url
-     * @param string $type
+     * @param string $name
      * @param array  $params
      * @return array
      */
-    public function postFile($url, $type, array $params = [])
+    public function postMultipart($url, $name, array $params = [])
     {
         $multipart = [];
 
         foreach ($params as $key => $param) {
             if ($key !== 'attachments') {
                 $multipart[] = [
-                    'name' => "{$type}[{$key}]",
+                    'name' => "{$name}[{$key}]",
                     'contents' => $param,
                 ];
             }
@@ -69,7 +69,7 @@ class RequestService
         if (isset($params['attachments']) && $attachments = (array) $params['attachments']) {
             foreach ($attachments as $key => $attachment) {
                 $multipart[] = [
-                    'name' => "{$type}[attachments][{$key}]",
+                    'name' => "{$name}[attachments][{$key}]",
                     'contents' => fopen($attachment, 'rb'),
                 ];
             }

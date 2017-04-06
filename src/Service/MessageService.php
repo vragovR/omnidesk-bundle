@@ -61,7 +61,11 @@ class MessageService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->post("cases/{$params['case_id']}/messages", $params);
+        if (isset($params['attachments']) && !empty($params['attachments'])) {
+            $result = $this->requestService->postMultipart("cases/{$params['case_id']}/messages", 'message', $params);
+        } else {
+            $result = $this->requestService->post("cases/{$params['case_id']}/messages", $params);
+        }
 
         return $this->transformerFactory->get(MessageDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }

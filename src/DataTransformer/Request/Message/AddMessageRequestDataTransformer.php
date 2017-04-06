@@ -1,4 +1,5 @@
 <?php
+
 namespace OmnideskBundle\DataTransformer\Request\Message;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
@@ -16,12 +17,18 @@ class AddMessageRequestDataTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
+        $attachments = [];
+        foreach ($value->getAttachments() as $attachment) {
+            $attachments[] = $attachment->getRealPath();
+        }
+
         return [
             'case_id' => $value->getCaseId(),
             'content' => $value->getContent(),
             'content_html' => $value->getContentHtml(),
             'staff_id' => $value->getStaffId(),
             'user_id' => $value->getUserId(),
+            'attachments' => $attachments,
         ];
     }
 
