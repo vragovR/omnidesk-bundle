@@ -1,6 +1,9 @@
 <?php
 namespace OmnideskBundle\Service;
 
+use GuzzleHttp\Exception\ClientException;
+use OmnideskBundle\Exception\UserAlreadyExistException;
+use OmnideskBundle\Exception\UserWrongEmailException;
 use OmnideskBundle\Factory\User\UserConfigurationFactory;
 use OmnideskBundle\Factory\User\UserDataTransformerFactory;
 use OmnideskBundle\Request\User\AddUserRequest;
@@ -51,6 +54,8 @@ class UserService extends AbstractService
     /**
      * @param AddUserRequest $request
      * @return UserResponse
+     * @throws UserAlreadyExistException
+     * @throws UserWrongEmailException
      */
     public function add(AddUserRequest $request)
     {
@@ -63,7 +68,24 @@ class UserService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->post('users', $params);
+        try {
+            $result = $this->requestService->post('users', $params);
+        } catch (ClientException $exception) {
+            $contents = json_decode($exception->getResponse()->getBody(), JSON_UNESCAPED_UNICODE);
+
+            switch ($contents['error']) {
+                case UserResponse::ERROR_EMAIL_ALREADY_EXIST:
+                    throw new UserAlreadyExistException();
+                case UserResponse::ERROR_PHONE_ALREADY_EXIST:
+                    throw new UserAlreadyExistException();
+                case UserResponse::ERROR_WRONG_EMAIL:
+                    throw new UserWrongEmailException();
+            }
+
+            throw $exception;
+        }
+
+
 
         return $this->transformerFactory->get(UserDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
