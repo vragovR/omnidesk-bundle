@@ -1,12 +1,12 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Entity;
+namespace OmnideskBundle\DataTransformer\Model;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
-use OmnideskBundle\Entity\Message;
+use OmnideskBundle\Model\Message;
 
 /**
  * Class MessageDataTransformer
- * @package OmnideskBundle\DataTransformer\Entity
+ * @package OmnideskBundle\DataTransformer\Model
  */
 class MessageDataTransformer implements DataTransformerInterface
 {
@@ -16,8 +16,8 @@ class MessageDataTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        $entity = new Message();
-        $entity
+        $model = new Message();
+        $model
             ->setId($value['message_id'])
             ->setUserId($value['user_id'])
             ->setStaffId($value['staff_id'])
@@ -27,7 +27,7 @@ class MessageDataTransformer implements DataTransformerInterface
             ->setNote($value['note'])
             ->setCreatedAt(new \DateTime($value['created_at']));
 
-        return $entity;
+        return $model;
     }
 
     /**

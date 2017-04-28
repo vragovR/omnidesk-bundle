@@ -1,7 +1,7 @@
 <?php
 namespace OmnideskBundle\Response\Cases;
 
-use OmnideskBundle\Entity\Cases;
+use OmnideskBundle\Model\Cases;
 
 /**
  * Class CasesResponse
@@ -9,6 +9,11 @@ use OmnideskBundle\Entity\Cases;
  */
 class CasesResponse
 {
+    /**
+     * @var string
+     */
+    const ERROR_INCORRECT_USER_EMAIL = 'incorrect_user_email';
+
     /**
      * @var Cases
      */

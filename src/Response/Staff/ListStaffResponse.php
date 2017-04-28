@@ -2,7 +2,7 @@
 namespace OmnideskBundle\Response\Staff;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use OmnideskBundle\Entity\Staff;
+use OmnideskBundle\Model\Staff;
 
 /**
  * Class ListStaffResponse

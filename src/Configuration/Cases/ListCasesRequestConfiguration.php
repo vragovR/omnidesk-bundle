@@ -1,7 +1,7 @@
 <?php
 namespace OmnideskBundle\Configuration\Cases;
 
-use OmnideskBundle\Entity\Cases;
+use OmnideskBundle\Model\Cases;
 use OmnideskBundle\Request\Cases\ListCasesRequest;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

@@ -1,8 +1,8 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Entity;
+namespace OmnideskBundle\DataTransformer\Model;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
-use OmnideskBundle\Entity\User;
+use OmnideskBundle\Model\User;
 
 /**
  * Class CasesDataTransformer
@@ -16,8 +16,8 @@ class UserDataTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        $entity = new User();
-        $entity
+        $model = new User();
+        $model
             ->setId($value['user_id'])
             ->setType($value['type'])
             ->setEmail(isset($value['email']) ? $value['email'] : null)
@@ -34,7 +34,7 @@ class UserDataTransformer implements DataTransformerInterface
             ->setPassword(isset($value['password']) ? $value['password'] : null)
             ->setCustomFields(isset($value['custom_fields']) ? $value['custom_fields'] : []);
 
-        return $entity;
+        return $model;
     }
 
     /**

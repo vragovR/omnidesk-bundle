@@ -1,7 +1,7 @@
 <?php
 namespace OmnideskBundle\Response\User;
 
-use OmnideskBundle\Entity\User;
+use OmnideskBundle\Model\User;
 
 /**
  * Class UserResponse

@@ -1,10 +1,10 @@
 <?php
 
-namespace OmnideskBundle\Entity;
+namespace OmnideskBundle\Model;
 
 /**
  * Class Message
- * @package OmnideskBundle\Entity
+ * @package OmnideskBundle\Model
  */
 class Message
 {

@@ -1,7 +1,7 @@
 <?php
 namespace OmnideskBundle\Response\Staff;
 
-use OmnideskBundle\Entity\Staff;
+use OmnideskBundle\Model\Staff;
 
 /**
  * Class StaffResponse

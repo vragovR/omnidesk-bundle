@@ -2,7 +2,7 @@
 namespace OmnideskBundle\DataTransformer\Response\Cases;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
-use OmnideskBundle\DataTransformer\Entity\CasesDataTransformer;
+use OmnideskBundle\DataTransformer\Model\CasesDataTransformer;
 use OmnideskBundle\Response\Cases\CasesResponse;
 
 /**

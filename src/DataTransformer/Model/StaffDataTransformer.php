@@ -1,12 +1,12 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Entity;
+namespace OmnideskBundle\DataTransformer\Model;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
-use OmnideskBundle\Entity\Staff;
+use OmnideskBundle\Model\Staff;
 
 /**
  * Class StaffDataTransformer
- * @package OmnideskBundle\DataTransformer\Entity
+ * @package OmnideskBundle\DataTransformer\Model
  */
 class StaffDataTransformer implements DataTransformerInterface
 {
@@ -16,8 +16,8 @@ class StaffDataTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        $entity = new Staff();
-        $entity
+        $model = new Staff();
+        $model
             ->setId($value['staff_id'])
             ->setEmail($value['staff_email'])
             ->setFullName($value['staff_full_name'])
@@ -27,7 +27,7 @@ class StaffDataTransformer implements DataTransformerInterface
             ->setCreatedAt(new \DateTime($value['created_at']))
             ->setUpdatedAt(new \DateTime($value['updated_at']));
 
-        return $entity;
+        return $model;
     }
 
     /**

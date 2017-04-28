@@ -2,7 +2,7 @@
 namespace OmnideskBundle\Response\Language;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use OmnideskBundle\Entity\Language;
+use OmnideskBundle\Model\Language;
 
 /**
  * Class GetLanguageResponse

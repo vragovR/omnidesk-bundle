@@ -2,7 +2,7 @@
 namespace OmnideskBundle\DataTransformer\Response\Language;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
-use OmnideskBundle\DataTransformer\Entity\LanguageDataTransformer;
+use OmnideskBundle\DataTransformer\Model\LanguageDataTransformer;
 use OmnideskBundle\Response\Language\GetLanguageResponse;
 
 /**

@@ -2,7 +2,7 @@
 namespace OmnideskBundle\Response\Cases;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use OmnideskBundle\Entity\Cases;
+use OmnideskBundle\Model\Cases;
 
 /**
  * Class GetCasesResponse

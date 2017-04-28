@@ -2,7 +2,7 @@
 namespace OmnideskBundle\Response\Message;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use OmnideskBundle\Entity\Message;
+use OmnideskBundle\Model\Message;
 
 /**
  * Class ListMessageResponse

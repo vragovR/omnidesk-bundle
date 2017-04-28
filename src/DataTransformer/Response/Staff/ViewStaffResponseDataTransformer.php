@@ -2,7 +2,7 @@
 namespace OmnideskBundle\DataTransformer\Response\Staff;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
-use OmnideskBundle\DataTransformer\Entity\StaffDataTransformer;
+use OmnideskBundle\DataTransformer\Model\StaffDataTransformer;
 use OmnideskBundle\Response\Staff\StaffResponse;
 
 /**

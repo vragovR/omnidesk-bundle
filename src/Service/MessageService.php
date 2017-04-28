@@ -1,6 +1,8 @@
 <?php
 namespace OmnideskBundle\Service;
 
+use GuzzleHttp\Exception\ClientException;
+use OmnideskBundle\Exception\StaffNotActiveException;
 use OmnideskBundle\Factory\Message\MessageConfigurationFactory;
 use OmnideskBundle\Factory\Message\MessageDataTransformerFactory;
 use OmnideskBundle\Request\Message\AddMessageRequest;
@@ -49,6 +51,7 @@ class MessageService extends AbstractService
     /**
      * @param AddMessageRequest $request
      * @return MessageResponse
+     * @throws StaffNotActiveException
      */
     public function add(AddMessageRequest $request)
     {
@@ -61,13 +64,23 @@ class MessageService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        if (isset($params['attachments']) && !empty($params['attachments'])) {
-            $result = $this->requestService->postMultipart("cases/{$params['case_id']}/messages", 'message', $params);
-        } else {
-            $result = $this->requestService->post("cases/{$params['case_id']}/messages", $params);
-        }
+        $transformer = $this->transformerFactory->get(MessageDataTransformerFactory::RESPONSE_VIEW);
 
-        return $this->transformerFactory->get(MessageDataTransformerFactory::RESPONSE_VIEW)->transform($result);
+        try {
+            if (isset($params['attachments']) && !empty($params['attachments'])) {
+                return $transformer->transform($this->requestService->postMultipart("cases/{$params['case_id']}/messages", 'message', $params));
+            }
+
+            return $transformer->transform($this->requestService->post("cases/{$params['case_id']}/messages", $params));
+        } catch (ClientException $exception) {
+            $contents = json_decode($exception->getResponse()->getBody(), JSON_UNESCAPED_UNICODE);
+
+            if ($contents['error'] === MessageResponse::ERROR_STAFF_NOT_ACTIVE) {
+                throw new StaffNotActiveException();
+            }
+
+            throw $exception;
+        }
     }
 
     /**

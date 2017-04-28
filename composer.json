@@ -21,11 +21,12 @@
     "symfony/dependency-injection": ">=2.8",
     "symfony/config": ">=2.8",
     "symfony/http-foundation": ">=2.8",
+    "symfony/http-kernel": ">=2.8",
     "doctrine/collections": ">=1.4",
     "guzzlehttp/guzzle": "6.1.*"
   },
   "require-dev": {
-    "phpunit/phpunit": "6.0.*"
+    "phpunit/phpunit": "5.7.*"
   },
   "autoload": {
     "psr-4": {

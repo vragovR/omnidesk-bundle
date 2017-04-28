@@ -1,8 +1,8 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Entity;
+namespace OmnideskBundle\DataTransformer\Model;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
-use OmnideskBundle\Entity\Cases;
+use OmnideskBundle\Model\Cases;
 
 /**
  * Class CasesDataTransformer
@@ -16,8 +16,8 @@ class CasesDataTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        $entity = new Cases();
-        $entity
+        $model = new Cases();
+        $model
             ->setId($value['case_id'])
             ->setNumber($value['case_number'])
             ->setSubject($value['subject'])
@@ -36,7 +36,7 @@ class CasesDataTransformer implements DataTransformerInterface
             ->setLanguageId($value['language_id'])
             ->setLabels($value['labels']);
 
-        return $entity;
+        return $model;
     }
 
     /**

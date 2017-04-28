@@ -1,12 +1,12 @@
 <?php
-namespace OmnideskBundle\DataTransformer\Entity;
+namespace OmnideskBundle\DataTransformer\Model;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
-use OmnideskBundle\Entity\Language;
+use OmnideskBundle\Model\Language;
 
 /**
  * Class LanguageDataTransformer
- * @package OmnideskBundle\DataTransformer\Entity
+ * @package OmnideskBundle\DataTransformer\Model
  */
 class LanguageDataTransformer implements DataTransformerInterface
 {
@@ -16,14 +16,14 @@ class LanguageDataTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        $entity = new Language();
-        $entity
+        $model = new Language();
+        $model
             ->setId($value['language_id'])
             ->setCode($value['code'])
             ->setTitle($value['title'])
             ->setActive($value['active']);
 
-        return $entity;
+        return $model;
     }
 
     /**

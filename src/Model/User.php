@@ -1,9 +1,9 @@
 <?php
-namespace OmnideskBundle\Entity;
+namespace OmnideskBundle\Model;
 
 /**
  * Class User
- * @package OmnideskBundle\Entity
+ * @package OmnideskBundle\Model
  */
 class User
 {

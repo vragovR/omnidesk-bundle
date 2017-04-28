@@ -2,7 +2,7 @@
 namespace OmnideskBundle\Response\User;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use OmnideskBundle\Entity\User;
+use OmnideskBundle\Model\User;
 
 /**
  * Class ListUserResponse

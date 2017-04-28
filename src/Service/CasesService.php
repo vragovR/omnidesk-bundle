@@ -3,6 +3,7 @@ namespace OmnideskBundle\Service;
 
 use GuzzleHttp\Exception\ClientException;
 use OmnideskBundle\Exception\CasesNotFoundException;
+use OmnideskBundle\Exception\IncorrectUserEmailException;
 use OmnideskBundle\Factory\Cases\CasesConfigurationFactory;
 use OmnideskBundle\Factory\Cases\CasesDataTransformerFactory;
 use OmnideskBundle\Request\Cases\AddCasesRequest;
@@ -53,6 +54,7 @@ class CasesService extends AbstractService
     /**
      * @param AddCasesRequest $request
      * @return CasesResponse
+     * @throws IncorrectUserEmailException
      */
     public function add(AddCasesRequest $request)
     {
@@ -65,13 +67,23 @@ class CasesService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        if (isset($params['attachments']) && !empty($params['attachments'])) {
-            $result = $this->requestService->postMultipart('cases', 'case', $params);
-        } else {
-            $result = $this->requestService->post('cases', $params);
-        }
+        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW);
 
-        return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
+        try {
+            if (isset($params['attachments']) && !empty($params['attachments'])) {
+                return $transformer->transform($this->requestService->postMultipart('cases', 'case', $params));
+            }
+
+            return $transformer->transform($this->requestService->post('cases', $params));
+        } catch (ClientException $exception) {
+            $contents = json_decode($exception->getResponse()->getBody(), JSON_UNESCAPED_UNICODE);
+
+            if ($contents['error'] === CasesResponse::ERROR_INCORRECT_USER_EMAIL) {
+                throw new IncorrectUserEmailException();
+            }
+
+            throw $exception;
+        }
     }
 
     /**

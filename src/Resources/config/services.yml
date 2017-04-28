@@ -129,42 +129,42 @@ services:
   # Response
   omnidesk.transformer.response.cases.view:
     class: OmnideskBundle\DataTransformer\Response\Cases\ViewCasesResponseDataTransformer
-    arguments: ["@omnidesk.transformer.entity.cases"]
+    arguments: ["@omnidesk.transformer.model.cases"]
   omnidesk.transformer.response.cases.list:
     class: OmnideskBundle\DataTransformer\Response\Cases\ListCasesResponseDataTransformer
-    arguments: ["@omnidesk.transformer.entity.cases"]
+    arguments: ["@omnidesk.transformer.model.cases"]
   omnidesk.transformer.response.message.view:
     class: OmnideskBundle\DataTransformer\Response\Message\ViewMessageResponseDataTransformer
-    arguments: ["@omnidesk.transformer.entity.message"]
+    arguments: ["@omnidesk.transformer.model.message"]
   omnidesk.transformer.response.message.list:
     class: OmnideskBundle\DataTransformer\Response\Message\ListMessageResponseDataTransformer
-    arguments: ["@omnidesk.transformer.entity.message"]
+    arguments: ["@omnidesk.transformer.model.message"]
   omnidesk.transformer.response.language.list:
     class: OmnideskBundle\DataTransformer\Response\Language\ListLanguageResponseDataTransformer
-    arguments: ["@omnidesk.transformer.entity.language"]
+    arguments: ["@omnidesk.transformer.model.language"]
   omnidesk.transformer.response.user.view:
     class: OmnideskBundle\DataTransformer\Response\User\ViewUserResponseDataTransformer
-    arguments: ["@omnidesk.transformer.entity.user"]
+    arguments: ["@omnidesk.transformer.model.user"]
   omnidesk.transformer.response.user.list:
     class: OmnideskBundle\DataTransformer\Response\User\ListUserResponseDataTransformer
-    arguments: ["@omnidesk.transformer.entity.user"]
+    arguments: ["@omnidesk.transformer.model.user"]
   omnidesk.transformer.response.staff.view:
     class: OmnideskBundle\DataTransformer\Response\Staff\ViewStaffResponseDataTransformer
-    arguments: ["@omnidesk.transformer.entity.staff"]
+    arguments: ["@omnidesk.transformer.model.staff"]
   omnidesk.transformer.response.staff.list:
     class: OmnideskBundle\DataTransformer\Response\Staff\ListStaffResponseDataTransformer
-    arguments: ["@omnidesk.transformer.entity.staff"]
-  # Entity
-  omnidesk.transformer.entity.cases:
-    class: OmnideskBundle\DataTransformer\Entity\CasesDataTransformer
-  omnidesk.transformer.entity.message:
-    class: OmnideskBundle\DataTransformer\Entity\MessageDataTransformer
-  omnidesk.transformer.entity.language:
-    class: OmnideskBundle\DataTransformer\Entity\LanguageDataTransformer
-  omnidesk.transformer.entity.user:
-    class: OmnideskBundle\DataTransformer\Entity\UserDataTransformer
-  omnidesk.transformer.entity.staff:
-    class: OmnideskBundle\DataTransformer\Entity\StaffDataTransformer
+    arguments: ["@omnidesk.transformer.model.staff"]
+  # Model
+  omnidesk.transformer.model.cases:
+    class: OmnideskBundle\DataTransformer\Model\CasesDataTransformer
+  omnidesk.transformer.model.message:
+    class: OmnideskBundle\DataTransformer\Model\MessageDataTransformer
+  omnidesk.transformer.model.language:
+    class: OmnideskBundle\DataTransformer\Model\LanguageDataTransformer
+  omnidesk.transformer.model.user:
+    class: OmnideskBundle\DataTransformer\Model\UserDataTransformer
+  omnidesk.transformer.model.staff:
+    class: OmnideskBundle\DataTransformer\Model\StaffDataTransformer
   # Configuration
   omnidesk.configuration.cases.add:
     class: OmnideskBundle\Configuration\Cases\AddCasesRequestConfiguration

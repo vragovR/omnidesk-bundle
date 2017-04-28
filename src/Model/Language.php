@@ -1,9 +1,9 @@
 <?php
-namespace OmnideskBundle\Entity;
+namespace OmnideskBundle\Model;
 
 /**
  * Class Language
- * @package OmnideskBundle\Entity
+ * @package OmnideskBundle\Model
  */
 class Language
 {

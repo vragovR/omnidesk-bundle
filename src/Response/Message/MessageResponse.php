@@ -1,7 +1,7 @@
 <?php
 namespace OmnideskBundle\Response\Message;
 
-use OmnideskBundle\Entity\Message;
+use OmnideskBundle\Model\Message;
 
 /**
  * Class MessageResponse
@@ -9,6 +9,11 @@ use OmnideskBundle\Entity\Message;
  */
 class MessageResponse
 {
+    /**
+     * @var string
+     */
+    const ERROR_STAFF_NOT_ACTIVE = 'staff_not_active';
+
     /**
      * @var Message
      */
