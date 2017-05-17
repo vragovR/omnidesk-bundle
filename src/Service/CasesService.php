@@ -85,7 +85,7 @@ class CasesService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->put("cases/{$params['case_id']}", $params);
+        $result = $this->requestService->put("cases/{$params['case_id']}", ['case' => $params]);
 
         return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
