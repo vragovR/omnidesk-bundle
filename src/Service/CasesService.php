@@ -67,23 +67,9 @@ class CasesService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $transformer = $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW);
+        $result = $this->requestService->postMultipart('cases', 'case', $params);
 
-        try {
-            if (isset($params['attachments']) && !empty($params['attachments'])) {
-                return $transformer->transform($this->requestService->postMultipart('cases', 'case', $params));
-            }
-
-            return $transformer->transform($this->requestService->post('cases', $params));
-        } catch (ClientException $exception) {
-            $contents = json_decode($exception->getResponse()->getBody(), JSON_UNESCAPED_UNICODE);
-
-            if ($contents['error'] === CasesResponse::ERROR_INCORRECT_USER_EMAIL) {
-                throw new IncorrectUserEmailException();
-            }
-
-            throw $exception;
-        }
+        return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
 
     /**
@@ -101,7 +87,7 @@ class CasesService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->put("cases/{$params['case_id']}", $params);
+        $result = $this->requestService->put("cases/{$params['case_id']}", ['case' => $params]);
 
         return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }

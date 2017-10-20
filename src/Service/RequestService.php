@@ -58,7 +58,7 @@ class RequestService
         $multipart = [];
 
         foreach ($params as $key => $param) {
-            if ($key !== 'attachments') {
+            if ($key !== 'attachments' && $key !== 'custom_fields') {
                 $multipart[] = [
                     'name' => "{$name}[{$key}]",
                     'contents' => $param,
@@ -71,6 +71,15 @@ class RequestService
                 $multipart[] = [
                     'name' => "{$name}[attachments][{$key}]",
                     'contents' => fopen($attachment, 'rb'),
+                ];
+            }
+        }
+
+        if (isset($params['custom_fields']) && $fields = (array) $params['custom_fields']) {
+            foreach ($fields as $key => $field) {
+                $multipart[] = [
+                    'name' => "{$name}[custom_fields][{$key}]",
+                    'contents' => $field,
                 ];
             }
         }
