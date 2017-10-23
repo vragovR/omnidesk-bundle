@@ -32,7 +32,7 @@ class CasesDataTransformer implements DataTransformerInterface
             ->setSpam($value['spam'])
             ->setCreatedAt(new \DateTime($value['created_at']))
             ->setUpdatedAt(new \DateTime($value['updated_at']))
-            ->setClosingSpeed(isset($value['closing_speed']) ? $value['closing_speed'] : null)
+            ->setClosingSpeed($value['closing_speed'] ?? null)
             ->setLanguageId($value['language_id'])
             ->setLabels($value['labels']);
 

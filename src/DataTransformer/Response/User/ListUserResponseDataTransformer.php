@@ -39,7 +39,7 @@ class ListUserResponseDataTransformer implements DataTransformerInterface
             }
         }
 
-        $response->setTotalCount(isset($value['total_count']) ? $value['total_count'] : 0);
+        $response->setTotalCount($value['total_count'] ?? 0);
 
         return $response;
     }

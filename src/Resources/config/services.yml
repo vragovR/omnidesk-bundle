@@ -1,196 +1,24 @@
 services:
-  # Vendor
-  omnidesk.guzzle.client:
-    class: GuzzleHttp\Client
-  # Services
-  omnidesk.service.request:
-    class: OmnideskBundle\Service\RequestService
-    arguments: ["%omnidesk%", "@omnidesk.guzzle.client"]
-  omnidesk.service.cases:
-    class: OmnideskBundle\Service\CasesService
-    arguments:
-      - "@omnidesk.service.request"
-      - "@omnidesk.factory.cases.transformer"
-      - "@omnidesk.factory.cases.configuration"
-  omnidesk.service.message:
-    class: OmnideskBundle\Service\MessageService
-    arguments:
-      - "@omnidesk.service.request"
-      - "@omnidesk.factory.message.transformer"
-      - "@omnidesk.factory.message.configuration"
-  omnidesk.service.language:
-    class: OmnideskBundle\Service\LanguageService
-    arguments:
-      - "@omnidesk.service.request"
-      - "@omnidesk.transformer.response.language.list"
-  omnidesk.service.user:
-    class: OmnideskBundle\Service\UserService
-    arguments:
-      - "@omnidesk.service.request"
-      - "@omnidesk.factory.user.transformer"
-      - "@omnidesk.factory.user.configuration"
-  omnidesk.service.staff:
-    class: OmnideskBundle\Service\StaffService
-    arguments:
-      - "@omnidesk.service.request"
-      - "@omnidesk.factory.staff.transformer"
-      - "@omnidesk.factory.staff.configuration"
-  # Factory
-  omnidesk.factory.cases.transformer:
-    class: OmnideskBundle\Factory\Cases\CasesDataTransformerFactory
-    arguments:
-      - "@omnidesk.transformer.request.cases.add"
-      - "@omnidesk.transformer.request.cases.edit"
-      - "@omnidesk.transformer.request.cases.list"
-      - "@omnidesk.transformer.request.cases.view"
-      - "@omnidesk.transformer.response.cases.list"
-      - "@omnidesk.transformer.response.cases.view"
-  omnidesk.factory.cases.configuration:
-    class: OmnideskBundle\Factory\Cases\CasesConfigurationFactory
-    arguments:
-      - "@omnidesk.configuration.cases.add"
-      - "@omnidesk.configuration.cases.edit"
-      - "@omnidesk.configuration.cases.list"
-      - "@omnidesk.configuration.cases.view"
-  omnidesk.factory.message.transformer:
-    class: OmnideskBundle\Factory\Message\MessageDataTransformerFactory
-    arguments:
-      - "@omnidesk.transformer.request.message.add"
-      - "@omnidesk.transformer.request.message.list"
-      - "@omnidesk.transformer.response.message.list"
-      - "@omnidesk.transformer.response.message.view"
-  omnidesk.factory.message.configuration:
-    class: OmnideskBundle\Factory\Message\MessageConfigurationFactory
-    arguments:
-      - "@omnidesk.configuration.message.add"
-      - "@omnidesk.configuration.message.list"
-  omnidesk.factory.staff.transformer:
-    class: OmnideskBundle\Factory\Staff\StaffDataTransformerFactory
-    arguments:
-      - "@omnidesk.transformer.request.staff.add"
-      - "@omnidesk.transformer.request.staff.edit"
-      - "@omnidesk.transformer.request.staff.list"
-      - "@omnidesk.transformer.request.staff.view"
-      - "@omnidesk.transformer.response.staff.list"
-      - "@omnidesk.transformer.response.staff.view"
-  omnidesk.factory.staff.configuration:
-    class: OmnideskBundle\Factory\Staff\StaffConfigurationFactory
-    arguments:
-      - "@omnidesk.configuration.staff.add"
-      - "@omnidesk.configuration.staff.edit"
-      - "@omnidesk.configuration.staff.list"
-      - "@omnidesk.configuration.staff.view"
-  omnidesk.factory.user.transformer:
-    class: OmnideskBundle\Factory\User\UserDataTransformerFactory
-    arguments:
-      - "@omnidesk.transformer.request.user.add"
-      - "@omnidesk.transformer.request.user.edit"
-      - "@omnidesk.transformer.request.user.list"
-      - "@omnidesk.transformer.request.user.view"
-      - "@omnidesk.transformer.response.user.list"
-      - "@omnidesk.transformer.response.user.view"
-  omnidesk.factory.user.configuration:
-    class: OmnideskBundle\Factory\User\UserConfigurationFactory
-    arguments:
-      - "@omnidesk.configuration.user.add"
-      - "@omnidesk.configuration.user.edit"
-      - "@omnidesk.configuration.user.list"
-      - "@omnidesk.configuration.user.view"
-  # Data Transformers
-  # Request
-  omnidesk.transformer.request.cases.add:
-    class: OmnideskBundle\DataTransformer\Request\Cases\AddCasesRequestDataTransformer
-  omnidesk.transformer.request.cases.edit:
-    class: OmnideskBundle\DataTransformer\Request\Cases\EditCasesRequestDataTransformer
-  omnidesk.transformer.request.cases.list:
-    class: OmnideskBundle\DataTransformer\Request\Cases\ListCasesRequestDataTransformer
-  omnidesk.transformer.request.cases.view:
-    class: OmnideskBundle\DataTransformer\Request\Cases\ViewCasesRequestDataTransformer
-  omnidesk.transformer.request.message.add:
-    class: OmnideskBundle\DataTransformer\Request\Message\AddMessageRequestDataTransformer
-  omnidesk.transformer.request.message.list:
-    class: OmnideskBundle\DataTransformer\Request\Message\ListMessageRequestDataTransformer
-  omnidesk.transformer.request.user.add:
-    class: OmnideskBundle\DataTransformer\Request\User\AddUserRequestDataTransformer
-  omnidesk.transformer.request.user.edit:
-    class: OmnideskBundle\DataTransformer\Request\User\EditUserRequestDataTransformer
-  omnidesk.transformer.request.user.list:
-    class: OmnideskBundle\DataTransformer\Request\User\ListUserRequestDataTransformer
-  omnidesk.transformer.request.user.view:
-    class: OmnideskBundle\DataTransformer\Request\User\ViewUserRequestDataTransformer
-  omnidesk.transformer.request.staff.add:
-    class: OmnideskBundle\DataTransformer\Request\Staff\AddStaffRequestDataTransformer
-  omnidesk.transformer.request.staff.edit:
-    class: OmnideskBundle\DataTransformer\Request\Staff\EditStaffRequestDataTransformer
-  omnidesk.transformer.request.staff.list:
-    class: OmnideskBundle\DataTransformer\Request\Staff\ListStaffRequestDataTransformer
-  omnidesk.transformer.request.staff.view:
-    class: OmnideskBundle\DataTransformer\Request\Staff\ViewStaffRequestDataTransformer
-  # Response
-  omnidesk.transformer.response.cases.view:
-    class: OmnideskBundle\DataTransformer\Response\Cases\ViewCasesResponseDataTransformer
-    arguments: ["@omnidesk.transformer.model.cases"]
-  omnidesk.transformer.response.cases.list:
-    class: OmnideskBundle\DataTransformer\Response\Cases\ListCasesResponseDataTransformer
-    arguments: ["@omnidesk.transformer.model.cases"]
-  omnidesk.transformer.response.message.view:
-    class: OmnideskBundle\DataTransformer\Response\Message\ViewMessageResponseDataTransformer
-    arguments: ["@omnidesk.transformer.model.message"]
-  omnidesk.transformer.response.message.list:
-    class: OmnideskBundle\DataTransformer\Response\Message\ListMessageResponseDataTransformer
-    arguments: ["@omnidesk.transformer.model.message"]
-  omnidesk.transformer.response.language.list:
-    class: OmnideskBundle\DataTransformer\Response\Language\ListLanguageResponseDataTransformer
-    arguments: ["@omnidesk.transformer.model.language"]
-  omnidesk.transformer.response.user.view:
-    class: OmnideskBundle\DataTransformer\Response\User\ViewUserResponseDataTransformer
-    arguments: ["@omnidesk.transformer.model.user"]
-  omnidesk.transformer.response.user.list:
-    class: OmnideskBundle\DataTransformer\Response\User\ListUserResponseDataTransformer
-    arguments: ["@omnidesk.transformer.model.user"]
-  omnidesk.transformer.response.staff.view:
-    class: OmnideskBundle\DataTransformer\Response\Staff\ViewStaffResponseDataTransformer
-    arguments: ["@omnidesk.transformer.model.staff"]
-  omnidesk.transformer.response.staff.list:
-    class: OmnideskBundle\DataTransformer\Response\Staff\ListStaffResponseDataTransformer
-    arguments: ["@omnidesk.transformer.model.staff"]
-  # Model
-  omnidesk.transformer.model.cases:
-    class: OmnideskBundle\DataTransformer\Model\CasesDataTransformer
-  omnidesk.transformer.model.message:
-    class: OmnideskBundle\DataTransformer\Model\MessageDataTransformer
-  omnidesk.transformer.model.language:
-    class: OmnideskBundle\DataTransformer\Model\LanguageDataTransformer
-  omnidesk.transformer.model.user:
-    class: OmnideskBundle\DataTransformer\Model\UserDataTransformer
-  omnidesk.transformer.model.staff:
-    class: OmnideskBundle\DataTransformer\Model\StaffDataTransformer
-  # Configuration
-  omnidesk.configuration.cases.add:
-    class: OmnideskBundle\Configuration\Cases\AddCasesRequestConfiguration
-  omnidesk.configuration.cases.edit:
-    class: OmnideskBundle\Configuration\Cases\EditCasesRequestConfiguration
-  omnidesk.configuration.cases.list:
-    class: OmnideskBundle\Configuration\Cases\ListCasesRequestConfiguration
-  omnidesk.configuration.cases.view:
-    class: OmnideskBundle\Configuration\Cases\ViewCasesRequestConfiguration
-  omnidesk.configuration.message.add:
-    class: OmnideskBundle\Configuration\Message\AddMessageRequestConfiguration
-  omnidesk.configuration.message.list:
-    class: OmnideskBundle\Configuration\Message\ListMessageRequestConfiguration
-  omnidesk.configuration.user.add:
-    class: OmnideskBundle\Configuration\User\AddUserRequestConfiguration
-  omnidesk.configuration.user.edit:
-    class: OmnideskBundle\Configuration\User\EditUserRequestConfiguration
-  omnidesk.configuration.user.list:
-    class: OmnideskBundle\Configuration\User\ListUserRequestConfiguration
-  omnidesk.configuration.user.view:
-    class: OmnideskBundle\Configuration\User\ViewUserRequestConfiguration
-  omnidesk.configuration.staff.add:
-    class: OmnideskBundle\Configuration\Staff\AddStaffRequestConfiguration
-  omnidesk.configuration.staff.edit:
-    class: OmnideskBundle\Configuration\Staff\EditStaffRequestConfiguration
-  omnidesk.configuration.staff.list:
-    class: OmnideskBundle\Configuration\Staff\ListStaffRequestConfiguration
-  omnidesk.configuration.staff.view:
-    class: OmnideskBundle\Configuration\Staff\ViewStaffRequestConfiguration
+  _defaults:
+      autowire: true
+      autoconfigure: true
+      public: false
+
+  OmnideskBundle\Service\:
+      resource: '../../Service'
+      public: true
+
+  OmnideskBundle\Factory\:
+      resource: '../../Factory'
+
+  OmnideskBundle\DataTransformer\:
+      resource: '../../DataTransformer'
+
+  OmnideskBundle\Configuration\:
+      resource: '../../Configuration'
+
+  OmnideskBundle\Service\RequestService:
+      public: false
+      arguments:
+          $config: "%omnidesk%"
+

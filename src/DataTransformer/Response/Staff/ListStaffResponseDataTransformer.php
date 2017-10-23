@@ -39,7 +39,7 @@ class ListStaffResponseDataTransformer implements DataTransformerInterface
             }
         }
 
-        $response->setTotalCount($value['total_count']);
+        $response->setTotalCount($value['total_count'] ?? 0);
 
         return $response;
     }

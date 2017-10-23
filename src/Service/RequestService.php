@@ -22,13 +22,13 @@ class RequestService
 
     /**
      * RequestService constructor.
-     * @param array  $config
      * @param Client $client
+     * @param array  $config
      */
-    public function __construct(array $config, Client $client)
+    public function __construct(Client $client, array $config)
     {
-        $this->config = $config;
         $this->client = $client;
+        $this->config = $config;
     }
 
     /**

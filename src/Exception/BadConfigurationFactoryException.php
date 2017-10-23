@@ -7,4 +7,5 @@ namespace OmnideskBundle\Exception;
  */
 class BadConfigurationFactoryException extends \Exception
 {
+    public $message = 'Bad configuration exception.';
 }

@@ -18,10 +18,11 @@ class ListCasesResponseDataTransformer implements DataTransformerInterface
 
     /**
      * GetCasesResponseDataTransformer constructor.
+     * @param CasesDataTransformer $casesDataTransformer
      */
-    public function __construct()
+    public function __construct(CasesDataTransformer $casesDataTransformer)
     {
-        $this->casesDataTransformer = new CasesDataTransformer();
+        $this->casesDataTransformer = $casesDataTransformer;
     }
 
     /**
@@ -38,7 +39,7 @@ class ListCasesResponseDataTransformer implements DataTransformerInterface
             }
         }
 
-        $response->setTotalCount($value['total_count']);
+        $response->setTotalCount($value['total_count'] ?? 0);
 
         return $response;
     }

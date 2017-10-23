@@ -37,6 +37,7 @@ class Language
 
     /**
      * @param int $id
+     * @return $this
      */
     public function setId($id)
     {
@@ -55,6 +56,7 @@ class Language
 
     /**
      * @param string $code
+     * @return $this
      */
     public function setCode($code)
     {
@@ -73,6 +75,7 @@ class Language
 
     /**
      * @param string $title
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -91,6 +94,7 @@ class Language
 
     /**
      * @param bool $active
+     * @return $this
      */
     public function setActive($active)
     {

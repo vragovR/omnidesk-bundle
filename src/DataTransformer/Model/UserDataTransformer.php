@@ -20,7 +20,7 @@ class UserDataTransformer implements DataTransformerInterface
         $model
             ->setId($value['user_id'])
             ->setType($value['type'])
-            ->setEmail(isset($value['email']) ? $value['email'] : null)
+            ->setEmail($value['email'] ?? null)
             ->setLanguageId($value['language_id'])
             ->setFullName($value['user_full_name'])
             ->setCompanyName($value['company_name'])
@@ -31,8 +31,8 @@ class UserDataTransformer implements DataTransformerInterface
             ->setDelete($value['deleted'])
             ->setCreatedAt(new \DateTime($value['created_at']))
             ->setUpdatedAt(new \DateTime($value['updated_at']))
-            ->setPassword(isset($value['password']) ? $value['password'] : null)
-            ->setCustomFields(isset($value['custom_fields']) ? $value['custom_fields'] : []);
+            ->setPassword($value['password'] ?? null)
+            ->setCustomFields($value['custom_fields'] ?? []);
 
         return $model;
     }
