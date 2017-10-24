@@ -69,7 +69,7 @@ class UserService extends AbstractService
         }
 
         try {
-            $result = $this->requestService->post('users', $params);
+            $result = $this->requestService->post('users', ['user' => $params]);
         } catch (ClientException $exception) {
             $contents = json_decode($exception->getResponse()->getBody(), JSON_UNESCAPED_UNICODE);
 

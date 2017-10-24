@@ -71,7 +71,7 @@ class MessageService extends AbstractService
                 return $transformer->transform($this->requestService->postMultipart("cases/{$params['case_id']}/messages", 'message', $params));
             }
 
-            return $transformer->transform($this->requestService->post("cases/{$params['case_id']}/messages", $params));
+            return $transformer->transform($this->requestService->post("cases/{$params['case_id']}/messages", ['message' => $params]));
         } catch (ClientException $exception) {
             $contents = json_decode($exception->getResponse()->getBody(), JSON_UNESCAPED_UNICODE);
 

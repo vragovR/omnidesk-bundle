@@ -68,7 +68,7 @@ class StaffService extends AbstractService
         }
 
         try {
-            $result = $this->requestService->post('staff', $params);
+            $result = $this->requestService->post('staff', ['staff' => $params]);
         } catch (ClientException $exception) {
             $contents = json_decode($exception->getResponse()->getBody(), JSON_UNESCAPED_UNICODE);
 

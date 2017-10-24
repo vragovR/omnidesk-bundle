@@ -63,7 +63,7 @@ class GroupService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->post('groups', $params);
+        $result = $this->requestService->post('groups', ['group' => $params]);
 
         return $this->transformerFactory->get(GroupDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
