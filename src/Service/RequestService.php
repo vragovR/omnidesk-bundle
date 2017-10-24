@@ -41,7 +41,7 @@ class RequestService
         $response = $this->client->post($this->getUrl($url), [
             'headers' => $this->getHeaders(),
             'auth' => $this->getAuth(),
-            'body' => $params,
+            'body' => json_encode($params),
         ]);
 
         return json_decode((string) $response->getBody(), true);
