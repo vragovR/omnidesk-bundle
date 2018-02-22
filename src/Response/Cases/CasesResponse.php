@@ -15,6 +15,11 @@ class CasesResponse
     const ERROR_INCORRECT_USER_EMAIL = 'incorrect_user_email';
 
     /**
+     * @var string
+     */
+    const ERROR_STAFF_HAS_NOT_ACCESS = 'staff_has_not_access';
+
+    /**
      * @var Cases
      */
     private $cases;

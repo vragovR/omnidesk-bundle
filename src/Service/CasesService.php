@@ -4,6 +4,7 @@ namespace OmnideskBundle\Service;
 use GuzzleHttp\Exception\ClientException;
 use OmnideskBundle\Exception\CasesNotFoundException;
 use OmnideskBundle\Exception\IncorrectUserEmailException;
+use OmnideskBundle\Exception\StaffNotActiveException;
 use OmnideskBundle\Factory\Cases\CasesConfigurationFactory;
 use OmnideskBundle\Factory\Cases\CasesDataTransformerFactory;
 use OmnideskBundle\Request\Cases\AddCasesRequest;
@@ -87,7 +88,17 @@ class CasesService extends AbstractService
             throw new InvalidConfigurationException($exception->getMessage());
         }
 
-        $result = $this->requestService->put("cases/{$params['case_id']}", ['case' => $params]);
+        try {
+            $result = $this->requestService->put("cases/{$params['case_id']}", ['case' => $params]);
+        } catch (ClientException $exception) {
+            $contents = json_decode($exception->getResponse()->getBody(), JSON_UNESCAPED_UNICODE);
+
+            if ($contents['error'] === CasesResponse::ERROR_STAFF_HAS_NOT_ACCESS) {
+                throw new StaffNotActiveException(CasesResponse::ERROR_STAFF_HAS_NOT_ACCESS);
+            }
+
+            throw $exception;
+        }
 
         return $this->transformerFactory->get(CasesDataTransformerFactory::RESPONSE_VIEW)->transform($result);
     }
