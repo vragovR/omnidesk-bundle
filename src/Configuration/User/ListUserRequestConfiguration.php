@@ -47,6 +47,8 @@ class ListUserRequestConfiguration implements ConfigurationInterface
                     ->defaultNull()
                 ->end()
                 ->arrayNode('custom_fields')
+                    ->prototype('scalar')
+                    ->end()
                 ->end()
                 ->booleanNode('amount_of_cases')
                     ->defaultFalse()

@@ -40,6 +40,8 @@ class EditCasesRequestConfiguration implements ConfigurationInterface
                     ->defaultNull()
                 ->end()
                 ->arrayNode('custom_fields')
+                    ->prototype('scalar')
+                    ->end()
                 ->end()
                 ->arrayNode('add_labels')
                 ->end()

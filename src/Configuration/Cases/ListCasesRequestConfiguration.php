@@ -105,6 +105,8 @@ class ListCasesRequestConfiguration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->arrayNode('custom_fields')
+                    ->prototype('scalar')
+                    ->end()
                 ->end()
                 ->arrayNode('labels')
                 ->end()
