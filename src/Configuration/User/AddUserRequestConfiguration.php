@@ -43,6 +43,8 @@ class AddUserRequestConfiguration implements ConfigurationInterface
                     ->defaultNull()
                 ->end()
                 ->arrayNode('custom_fields')
+                    ->prototype('scalar')
+                    ->end()
                 ->end()
             ->end();
 
