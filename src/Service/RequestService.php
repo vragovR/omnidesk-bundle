@@ -3,6 +3,9 @@
 namespace OmnideskBundle\Service;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class RequestService
@@ -21,14 +24,26 @@ class RequestService
     protected $client;
 
     /**
+     * @var int|null
+     */
+    protected $callsLeft;
+
+    /**
      * RequestService constructor.
-     * @param Client $client
      * @param array  $config
      */
-    public function __construct(Client $client, array $config)
+    public function __construct(array $config)
     {
-        $this->client = $client;
+        $this->client = $this->getClient();
         $this->config = $config;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getCallsLeft()
+    {
+        return $this->callsLeft;
     }
 
     /**
@@ -136,6 +151,26 @@ class RequestService
         ]);
 
         return $response->getStatusCode();
+    }
+
+    /**
+     * @return Client
+     */
+    protected function getClient()
+    {
+        if (!$this->client) {
+            $stack = HandlerStack::create();
+
+            $stack->push(Middleware::mapResponse(function (ResponseInterface $response) {
+                $this->callsLeft = $response->getHeaderLine('api_calls_left') ?: null;
+
+                return $response;
+            }));
+
+            $this->client = new Client(['handler' => $stack]);
+        }
+
+        return $this->client;
     }
 
     /**
