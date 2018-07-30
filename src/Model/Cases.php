@@ -53,6 +53,16 @@ class Cases
     const PRIORITY_CRITICAL = 'critical';
 
     /**
+     * @var array
+     */
+    const PRIORITIES = [
+        self::PRIORITY_LOW,
+        self::PRIORITY_NORMAL,
+        self::PRIORITY_HIGH,
+        self::PRIORITY_CRITICAL,
+    ];
+
+    /**
      * @var string
      */
     const STATUS_OPEN = 'open';

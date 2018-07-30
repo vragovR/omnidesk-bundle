@@ -34,6 +34,7 @@ class CasesDataTransformer implements DataTransformerInterface
             ->setUpdatedAt(new \DateTime($value['updated_at']))
             ->setClosingSpeed($value['closing_speed'] ?? null)
             ->setLanguageId($value['language_id'])
+            ->setPriority($value['priority'])
             ->setLabels($value['labels']);
 
         return $model;

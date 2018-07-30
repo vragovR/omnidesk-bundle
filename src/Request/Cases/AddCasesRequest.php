@@ -62,9 +62,19 @@ class AddCasesRequest implements RequestInterface
     private $labels;
 
     /**
+     * @var string
+     */
+    private $priority;
+
+    /**
      * @var ArrayCollection|File[]
      */
     private $attachments;
+
+    /**
+     * @var integer
+     */
+    private $staffId;
 
     /**
      * AddCasesRequest constructor.
@@ -278,5 +288,43 @@ class AddCasesRequest implements RequestInterface
     public function addAttachment(File $attachment)
     {
         $this->attachments->add($attachment);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param string $priority
+     * @return $this
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStaffId()
+    {
+        return $this->staffId;
+    }
+
+    /**
+     * @param int $staffId
+     * @return $this
+     */
+    public function setStaffId($staffId)
+    {
+        $this->staffId = $staffId;
+
+        return $this;
     }
 }

@@ -2,6 +2,7 @@
 namespace OmnideskBundle\DataTransformer\Request\Cases;
 
 use OmnideskBundle\DataTransformer\DataTransformerInterface;
+use OmnideskBundle\Model\Cases;
 use OmnideskBundle\Request\Cases\AddCasesRequest;
 
 /**
@@ -33,6 +34,7 @@ class AddCasesRequestDataTransformer implements DataTransformerInterface
             'custom_fields' => $value->getCustomFields(),
             'labels' => $value->getLabels(),
             'attachments' => $attachments,
+            'priority' => $value->getPriority(),
         ];
     }
 

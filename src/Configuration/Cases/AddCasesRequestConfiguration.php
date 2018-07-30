@@ -1,6 +1,7 @@
 <?php
 namespace OmnideskBundle\Configuration\Cases;
 
+use OmnideskBundle\Model\Cases;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -10,6 +11,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class AddCasesRequestConfiguration implements ConfigurationInterface
 {
+    /**
+     * @var string
+     */
+    const MESSAGE_INVALID_PRIORITY = 'Invalid priority. Allowed priorities are: %s';
+
     /**
      * @return TreeBuilder
      */
@@ -56,6 +62,17 @@ class AddCasesRequestConfiguration implements ConfigurationInterface
                 ->end()
                 ->arrayNode('attachments')
                     ->prototype('scalar')
+                    ->end()
+                ->end()
+                ->scalarNode('priority')
+                    ->defaultNull()
+                    ->validate()
+                        ->ifNotInArray(Cases::PRIORITIES)
+                        ->thenInvalid(sprintf(self::MESSAGE_INVALID_PRIORITY, implode(', ', Cases::PRIORITIES)))
+                    ->end()
+                ->end()
+                ->scalarNode('staff_id')
+                    ->defaultNull()
                 ->end()
             ->end();
 
