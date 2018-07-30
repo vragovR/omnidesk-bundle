@@ -35,6 +35,7 @@ class AddCasesRequestDataTransformer implements DataTransformerInterface
             'labels' => $value->getLabels(),
             'attachments' => $attachments,
             'priority' => $value->getPriority(),
+            'staff_id' => $value->getStaffId(),
         ];
     }
 
