@@ -29,10 +29,14 @@ class ListStaffRequest implements RequestInterface
 
     /**
      * @param int $page
+     *
+     * @return ListStaffRequest
      */
     public function setPage($page)
     {
         $this->page = $page;
+
+        return $this;
     }
 
     /**
@@ -45,9 +49,13 @@ class ListStaffRequest implements RequestInterface
 
     /**
      * @param int $limit
+     *
+     * @return ListStaffRequest
      */
     public function setLimit($limit)
     {
         $this->limit = $limit;
+
+        return $this;
     }
 }
